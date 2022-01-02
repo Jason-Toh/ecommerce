@@ -22,6 +22,12 @@ Route::redirect('/','login');
 
 // All users can see the product page
 Route::get('products', [ProductController::class, 'index'])->name('products');
+Route::prefix('cart')->group(function(){
+    Route::get('/',[CartController::class,'index'])->name('cart');
+    Route::get('add/{id}', [CartController::class, 'add'])->name('add.to.cart');
+    Route::post('update', [CartController::class, 'update'])->name('update.cart');
+    Route::get('remove/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
+});
 
 // Unauthenticated users can see these routes
 Route::middleware('guest')->group(function(){
@@ -35,12 +41,5 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth')->group(function() {
     Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('cart',[CartController::class,'index'])->name('cart');
-    Route::get('add-to-cart/{id}', [CartController::class, 'add'])->name('add.to.cart');
-    Route::post('update-cart', [CartController::class, 'update'])->name('update.cart');
-    Route::get('remove-from-cart/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
-    // Route::get('cart',[ProductController::class,'cart'])->name('cart');
-    // Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
-    // Route::get('checkout', [ProductController::class, 'checkout'])->name('checkout');
-    // Route::get('remove-from-cart/{id}', [ProductController::class, 'removeFromCart'])->name('remove.from.cart');
+    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 });
