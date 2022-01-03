@@ -25,7 +25,7 @@
                         <td>
                             RM 
                             <span class="unit-price" id="{{ $id }}">
-                                {{ number_format($product['price'],2) }}
+                                {{ number_format($product['price'],2,'.','') }}
                             </span>
                         </td>
                         <td>
@@ -42,7 +42,7 @@
                         <td>
                             RM 
                             <span class="total-price" id="{{ $id }}">
-                                {{ number_format($product['price'] * $product['quantity'],2) }}
+                                {{ number_format($product['price'] * $product['quantity'],2,'.','') }}
                             </span>   
                         </td>
                         <td>
@@ -55,15 +55,23 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" class="text-right total-price-checkout">
-                        <h3><strong>Total: RM{{ number_format($total,2) }}</strong></h3>
+                    <td colspan="5" class="text-right">
+                        <h3>
+                            <strong>
+                                Total: RM
+                                <span class="total-price-checkout">
+                                    {{ number_format($total,2,'.','') }}
+                                </span>
+                            </strong>
+                        </h3>
                     </td>
-                </tr>
-                <tr>
                     <td colspan="6" class="text-right checkout">
-                        <a href="{{ route('checkout') }}" type="button" class="btn btn-success checkout">
+                        <button type="button">
                             Checkout
-                        </a>
+                        </button>
+                        {{-- <a href="{{ route('checkout') }}" type="button" class="btn btn-success">
+                            Checkout
+                        </a> --}}
                     </td>
                 </tr>
             </tfoot>
@@ -80,13 +88,13 @@
 @push('scripts')
     <script type="text/javascript">
 
-        var total = 0;
+        var total = parseFloat($('.total-price-checkout').text().trim());
 
         function updateTotalPrice(productId){
             let unitPrice = parseFloat($(`#${productId}.unit-price`).text().trim());
             let quantity = parseInt($(`#${productId}.quantity`).val());
             let totalPrice = unitPrice * quantity;
-            let result = totalPrice ? totalPrice : 0
+            let result = totalPrice ? totalPrice : unitPrice
             $(`#${productId}.total-price`).text(`${result.toFixed(2)}`);
 
             // Sum up the total price
@@ -94,10 +102,10 @@
             $('.total-price').each(function(){
                 total += parseFloat($(this).text().trim());
             })
-            $('.total-price-checkout').html(`<h3><strong>RM ${total.toFixed(2)}</strong></h3>`);
+            $('.total-price-checkout').text(`${total.toFixed(2)}`);
         }
 
-        // Defaults the value to 0 if empty input
+        // Defaults the value to 1 if empty input
         $(`.quantity`).blur(function(){
             if($(this).val().trim().length === 0){
                 $(this).val(1);
@@ -130,21 +138,28 @@
         })
 
         $('.checkout').click(function(e){
-            console.log(total);
 
-            // Save all changes to the cart
-            // $.ajax({
-            //     url: "{{ route('update.cart') }}",
-            //     type: 'post',
-            //     data: {
-            //         _token: "{{ csrf_token() }}", //needed for 419 unknown status
-            //         id: productId,
-            //         quantity: quantity
-            //     },
-            //     success: function(response) {
-            //         window.location.reload();
-            //     }
-            // });
+            $('.quantity').each(function(){
+
+                // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
+                let productId = $(this).data('id');
+                let quantity = parseInt($(this).val());
+
+                // Save all changes to the cart
+                $.ajax({
+                    url: "{{ route('update.cart') }}",
+                    type: 'post',
+                    data: {
+                        _token: "{{ csrf_token() }}", //needed for 419 unknown status
+                        id: productId,
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        // Redirect to checkout page on success
+                        window.location.href = "{{ route('checkout') }}"
+                    }
+                })
+            })
         })
     </script>
 @endpush

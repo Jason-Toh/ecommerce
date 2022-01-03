@@ -18,6 +18,18 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('cart') }}">
+                            <i class="fa fa-shopping-cart"></i>
+                            Shopping Cart
+                            <span class="badge badge-light">
+                                {{-- Shows the number of items in the cart --}}
+                                @if(session()->has('cart'))
+                                    {{ sizeof(session()->get('cart')) }}
+                                @endif
+                            </span>
+                        </a>
+                    </li>
                     {{-- 
                         @guest is displayed only for unauthorized users
                         https://stackoverflow.com/questions/64075908/laravel-7-blade-view-guest-and-authuser-problem
@@ -43,18 +55,6 @@
                         TODO: Fixed authorized users able to access login page
                     --}}
                     @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart') }}">
-                                <i class="fa fa-shopping-cart"></i>
-                                Shopping Cart
-                                <span class="badge badge-light">
-                                    {{-- Shows the number of items in the cart --}}
-                                    @if(session()->has('cart'))
-                                        {{ sizeof(session()->get('cart')) }}
-                                    @endif
-                                </span>
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
