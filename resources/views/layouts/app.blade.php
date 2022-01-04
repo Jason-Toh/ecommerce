@@ -9,14 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <script src="{{ asset('js/script.js') }}" defer></script>
-
-    {{-- jQuery --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -25,10 +17,10 @@
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
     {{-- <!-- Styles --> Bootstrap v4 --}}
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 
     {{-- Custom CSS --}}
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     {{-- Material Design for Bootstrap --}}
     <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
@@ -52,6 +44,18 @@
             @yield('content')
         </div>
     </main>
+
+    {{-- https://stackoverflow.com/questions/10808109/script-tag-async-defer --}}
+    <!-- Scripts -->
+    <script defer src="{{ asset('js/app.js') }}"></script>
+    {{-- jQuery --}}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    {{-- Bootstrap tooltips --}}
+    <script defer src="{{ asset('js/popper.min.js') }}" ></script>
+    {{-- Bootstrap Core JavaScript --}}
+    <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
+    {{-- MDB Core JavaScript --}}
+    <script defer src="{{ asset('js/mdb.min.js') }}"></script>
 
     @stack('scripts')
 </body>
