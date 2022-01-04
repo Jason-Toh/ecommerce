@@ -30,12 +30,15 @@
     {{-- Custom CSS --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
+    {{-- Material Design for Bootstrap --}}
+    <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 </head>
 <body>
-    @include('includes.header');
+    @include('includes.header')
     {{-- 
         https://getbootstrap.com/docs/4.0/utilities/spacing/
 

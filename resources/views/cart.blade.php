@@ -66,12 +66,9 @@
                         </h3>
                     </td>
                     <td colspan="6" class="text-right checkout">
-                        <button type="button">
+                        <button type="button" class="btn btn-success">
                             Checkout
                         </button>
-                        {{-- <a href="{{ route('checkout') }}" type="button" class="btn btn-success">
-                            Checkout
-                        </a> --}}
                     </td>
                 </tr>
             </tfoot>

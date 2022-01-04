@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,5 @@ Route::middleware('guest')->group(function(){
 Route::middleware('auth')->group(function() {
     Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
     Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 });
