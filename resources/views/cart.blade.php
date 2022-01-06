@@ -57,12 +57,10 @@
                 <tr>
                     <td colspan="5" class="text-right">
                         <h3>
-                            <strong>
-                                Total: RM
-                                <span class="total-price-checkout">
-                                    {{ number_format($total,2,'.','') }}
-                                </span>
-                            </strong>
+                            Total: RM
+                            <span class="checkout-total-price">
+                                {{ number_format($total,2,'.','') }}
+                            </span>
                         </h3>
                     </td>
                     <td colspan="6" class="text-right checkout">
@@ -85,7 +83,7 @@
 @push('scripts')
     <script type="text/javascript">
 
-        var total = parseFloat($('.total-price-checkout').text().trim());
+        var total = parseFloat($('.checkout-total-price').text().trim());
 
         function updateTotalPrice(productId){
             let unitPrice = parseFloat($(`#${productId}.unit-price`).text().trim());
@@ -99,7 +97,7 @@
             $('.total-price').each(function(){
                 total += parseFloat($(this).text().trim());
             })
-            $('.total-price-checkout').text(`${total.toFixed(2)}`);
+            $('.checkout-total-price').text(`${total.toFixed(2)}`);
         }
 
         // Defaults the value to 1 if empty input
