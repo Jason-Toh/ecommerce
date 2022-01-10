@@ -10,8 +10,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products') }}">Products</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('orders') }}">Orders</a>
+                    </li>
                 </ul>
-
+                
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">

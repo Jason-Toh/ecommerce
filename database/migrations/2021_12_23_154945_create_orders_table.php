@@ -16,7 +16,14 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->double('total_cost', 8, 2)->default(0);
+            $table->string('billing_name');
+            $table->string('billing_email');
+            $table->string('billing_address');
+            $table->string('billing_city');
+            $table->string('billing_postcode');
+            $table->string('billing_country');
+            $table->string('billing_phone');
+            $table->double('billing_total', 8, 2)->default(0);
             $table->timestamps();
 
             // Foreign Key

@@ -18,9 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('image');
-            // The double method creates a DOUBLE 
-            // equivalent column with the given precision (total digits) and scale (decimal digits):
-            // precision = 8, scale = 2
             $table->decimal('price', 8, 2)->default(0);
             $table->timestamps();
         });

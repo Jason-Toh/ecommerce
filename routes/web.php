@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,8 @@ Route::middleware('auth')->group(function() {
     Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::prefix('order')->group(function(){
+        Route::get('/',[OrderController::class,'index'])->name('orders');
+        Route::post('store',[OrderController::class,'store'])->name('orders.store');
+    });
 });

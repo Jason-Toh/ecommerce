@@ -26,11 +26,11 @@
 
 /* Hide arrows in input number */
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
+} */
 
 /* Firefox */
 input[type="number"] {
@@ -65,6 +65,12 @@ input[type="number"] {
 
 .checkout img {
     max-height: 60px;
+    /*
+    background-image: url(https://cf.shopee.com.my/file/a50e86a…);
+    background-size: inherit;
+    background-repeat: no-repeat;
+    background-position: -14% 13%; 
+     */
 }
 
 .checkout-table-row {

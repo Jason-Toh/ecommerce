@@ -31,9 +31,9 @@
                         <td>
                             <div class="quantity-btn">
                                 <span class="minus">-</span>
-                                <input type="number" 
+                                <input type="text" 
                                     value="{{ $product['quantity'] }}" 
-                                    class="quantity update-quantity"
+                                    class="quantity update-quantity num-only"
                                     data-id="{{ $id }}"
                                     id="{{ $id }}">
                                 <span class="plus">+</span>
@@ -107,7 +107,12 @@
             }
         })
         
-        $('.update-quantity').keyup(function(e){
+        // Only allow positive number
+        $('.num-only').on('input', function(e) {
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        });
+
+        $('.update-quantity').on('input',function(e){
             let productId = $(this).attr('id');
             updateTotalPrice(productId);
         })
@@ -133,7 +138,6 @@
         })
 
         $('.checkout').click(function(e){
-
             $('.quantity').each(function(){
 
                 // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
