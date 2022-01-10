@@ -13,7 +13,10 @@ class Product extends Model
 
     // What can be inserted into the table
     protected $fillable = [
-        'name', 'price', 'description', 'image'
+        'name', 
+        'price', 
+        'description', 
+        'image'
     ];
 
     // Pivot table

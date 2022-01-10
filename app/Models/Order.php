@@ -17,7 +17,17 @@ class Order extends Model
 
         https://stackoverflow.com/questions/22279435/what-does-mass-assignment-mean-in-laravel
      */
-    protected $fillable = ['total_cost','user_id'];
+    protected $fillable = [
+        'user_id',
+        'billing_name',
+        'billing_email',
+        'billing_address',
+        'billing_city',
+        'billing_postcode',
+        'billing_country',
+        'billing_phone',
+        'billing_total'
+    ];
 
     public function user(){
         return $this->belongsTo(User::class);

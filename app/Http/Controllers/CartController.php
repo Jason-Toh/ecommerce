@@ -63,4 +63,13 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Product removed from cart successfully!');
     }
+
+    public function getCartTotal(){
+        $cart = session()->get('cart');
+        $total = 0;
+        foreach($cart as $product){
+            $total += (float) $product['price'] * (float) $product['quantity'];
+        }
+        return $total;
+    }
 }
