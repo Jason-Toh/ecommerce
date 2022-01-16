@@ -7,8 +7,9 @@ use App\Http\Controllers\CartController;
 
 class CheckoutController extends Controller
 {
-    public function index(){
-        $cart = session()->get('cart',[]);
+    public function index()
+    {
+        $cart = session()->get('cart', []);
         $total = CartController::getCartTotal();
         // $total = 0;
         // foreach($cart as $product){

@@ -12,18 +12,18 @@
         </thead>
         <tbody>
             <?php $count = 0; ?>
-            @foreach($orderItems as $orderItem)
+            @foreach ($orderItems as $orderItem)
                 <tr>
                     <?php
-                        $count += 1;
-                        $order = $orderItem['order'];
-                        $products = $orderItem['products'];
+                    $count += 1;
+                    $order = $orderItem['order'];
+                    $products = $orderItem['products'];
                     ?>
                     <td class="text-center">{{ $count }}</td>
                     <td class="text-center">{{ $order['created_at'] }}</td>
                     <td>
-                        @foreach($products as $product)
-                            <img src="{{ $product['image'] }}" class="img-fluid rounded"/>
+                        @foreach ($products as $product)
+                            <img src="{{ $product['image'] }}" class="img-fluid rounded" />
                             <div>
                                 <div>
                                     {{ $product['name'] }}
@@ -38,5 +38,5 @@
             @endforeach
         </tbody>
     </table>
-    
+
 @endsection
