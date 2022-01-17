@@ -52,14 +52,42 @@
                         </div>
                     </div>
                 </div>
-                {{-- <h2 style="margin-top:1em; margin-bottom:1em;">Payment details</h2>
+                {{-- <h3 class="text-muted">Payment Details</h3>
                 <div class="form-group">
-                    <label for="name_on_card">Name on card</label>
-                    <input type="text" name="name_on_card" class="form-control" required>
+                    <label for="cardholder"><i class="fa fa-user"></i> Cardholder Name</label>
+                    <input type="text" class="form-control" name="cardholder" id="cardholder" required>
                 </div>
                 <div class="form-group">
-                    <label for="credit_card">Credit Card</label>
-                    <input type="text" name="credit_card" class="form-control" required>
+                    <label for="cardnumber"><i class="fa fa-credit-card"></i> Card Number</label>
+                    <input type="text" class="form-control num-only" name="cardnumber" id="cardnumber" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="expiry_month"><i class="fa fa-calendar"></i> Expiry month</label>
+                        @php $months = range(1, 12); @endphp
+                        <select name="expiry_month" id="expiry_month">
+                            <option>Select Month</option>
+                            @foreach ($months as $month)
+                                <option value="{{ $month }}">{{ $month }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="expiry_year"><i class="fa fa-calendar"></i> Expiry Year</label>
+                        @php $years = range(1950, strftime("%Y", time())); @endphp
+                        <select name="expiry_year" id="expiry_year">
+                            <option>Select Year</option>
+                            @foreach ($years as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cvc">CVC</label>
+                            <input type="text" class="form-control num-only" name="cvc" id="cvc" required>
+                        </div>
+                    </div>
                 </div> --}}
                 <button type="submit" class="btn btn-success btn-block">Complete Order</button>
             </form>
@@ -73,9 +101,11 @@
                     @foreach ($products as $id => $product)
                         <tr>
                             <td>
-                                <div style="background-image: url({{ $product['image'] }})"
+                                {{-- @php dd($product['image'])@endphp --}}
+                                {{-- <div style="background-image: url({{ $product['image'] }})"
                                     class="img-fluid rounded checkout-image">
-                                </div>
+                                </div> --}}
+                                <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" />
                             </td>
                             <td>
                                 <div class="text-decoration-none">
@@ -101,4 +131,7 @@
             $(this).val($(this).val().replace(/[^0-9]/g, ''));
         });
     </script>
+
+    {{-- <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('js/checkout.js') }}"></script> --}}
 @endpush

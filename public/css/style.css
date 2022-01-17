@@ -4,10 +4,7 @@
     margin-top: 0; /* remove the gap so it doesn't close */
 }
 
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-
+.cart-image {
     width: 120px;
     min-height: 120px;
     max-height: auto;

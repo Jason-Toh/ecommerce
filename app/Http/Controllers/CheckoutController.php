@@ -10,11 +10,11 @@ class CheckoutController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        $total = CartController::getCartTotal();
-        // $total = 0;
-        // foreach($cart as $product){
-        //     $total += (float) $product['price'] * (float) $product['quantity'];
-        // }
+        // $total = CartController::getCartTotal();
+        $total = 0;
+        foreach ($cart as $product) {
+            $total += (float) $product['price'] * (float) $product['quantity'];
+        }
         return view('checkout')->with(['products' => $cart, 'total' => $total]);
     }
 }

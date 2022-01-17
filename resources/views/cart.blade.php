@@ -1,5 +1,5 @@
 @extends('layouts.app')
-  
+
 @section('content')
     @if (!empty($products))
         <table class="table">
@@ -15,35 +15,33 @@
             </thead>
             <tbody>
                 @php $total = 0; @endphp
-                @foreach($products as $id => $product)
+                @foreach ($products as $id => $product)
                     @php $total += $product['price'] * $product['quantity'] @endphp
                     <tr>
                         <td>
-                            <img src="{{ $product['image'] }}" class="img-fluid rounded"/>
+                            <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" />
                         </td>
                         <td>{{ $product['item']['name'] }}</td>
                         <td>
-                            RM 
+                            RM
                             <span class="unit-price" id="{{ $id }}">
-                                {{ number_format($product['price'],2,'.','') }}
+                                {{ number_format($product['price'], 2, '.', '') }}
                             </span>
                         </td>
                         <td>
                             <div class="quantity-btn">
                                 <span class="minus">-</span>
-                                <input type="text" 
-                                    value="{{ $product['quantity'] }}" 
-                                    class="quantity update-quantity num-only"
-                                    data-id="{{ $id }}"
+                                <input type="text" value="{{ $product['quantity'] }}"
+                                    class="quantity update-quantity num-only" data-id="{{ $id }}"
                                     id="{{ $id }}">
                                 <span class="plus">+</span>
                             </div>
                         </td>
                         <td>
-                            RM 
+                            RM
                             <span class="total-price" id="{{ $id }}">
-                                {{ number_format($product['price'] * $product['quantity'],2,'.','') }}
-                            </span>   
+                                {{ number_format($product['price'] * $product['quantity'], 2, '.', '') }}
+                            </span>
                         </td>
                         <td>
                             <a href="{{ route('remove.from.cart', $id) }}" class="btn btn-danger">
@@ -59,7 +57,7 @@
                         <h3>
                             Total: RM
                             <span class="checkout-total-price">
-                                {{ number_format($total,2,'.','') }}
+                                {{ number_format($total, 2, '.', '') }}
                             </span>
                         </h3>
                     </td>
@@ -82,10 +80,9 @@
 
 @push('scripts')
     <script type="text/javascript">
-
         var total = parseFloat($('.checkout-total-price').text().trim());
 
-        function updateTotalPrice(productId){
+        function updateTotalPrice(productId) {
             let unitPrice = parseFloat($(`#${productId}.unit-price`).text().trim());
             let quantity = parseInt($(`#${productId}.quantity`).val());
             let totalPrice = unitPrice * quantity;
@@ -94,30 +91,30 @@
 
             // Sum up the total price
             total = 0;
-            $('.total-price').each(function(){
+            $('.total-price').each(function() {
                 total += parseFloat($(this).text().trim());
             })
             $('.checkout-total-price').text(`${total.toFixed(2)}`);
         }
 
         // Defaults the value to 1 if empty input
-        $(`.quantity`).blur(function(){
-            if($(this).val().trim().length === 0){
+        $(`.quantity`).blur(function() {
+            if ($(this).val().trim().length === 0) {
                 $(this).val(1);
             }
         })
-        
+
         // Only allow positive number
         $('.num-only').on('input', function(e) {
             $(this).val($(this).val().replace(/[^0-9]/g, ''));
         });
 
-        $('.update-quantity').on('input',function(e){
+        $('.update-quantity').on('input', function(e) {
             let productId = $(this).attr('id');
             updateTotalPrice(productId);
         })
 
-        $('.minus').click(function(){
+        $('.minus').click(function() {
             let inputElem = $(this).parent().find('input');
             let quantity = parseInt(inputElem.val()) - 1;
 
@@ -127,7 +124,7 @@
             updateTotalPrice(productId);
         })
 
-        $('.plus').click(function(){
+        $('.plus').click(function() {
             let inputElem = $(this).parent().find('input');
             let quantity = parseInt(inputElem.val()) + 1;
 
@@ -137,8 +134,8 @@
             updateTotalPrice(productId);
         })
 
-        $('.checkout').click(function(e){
-            $('.quantity').each(function(){
+        $('.checkout').click(function(e) {
+            $('.quantity').each(function() {
 
                 // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
                 let productId = $(this).data('id');

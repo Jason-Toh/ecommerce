@@ -12,16 +12,13 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orderItems = new Collection;
-        // Explanation of has and with
-        // https://stackoverflow.com/questions/30231862/laravel-eloquent-has-with-wherehas-what-do-they-mean
+        // $orderItems = new Collection;
         $orders = Order::where('user_id', Auth::id())->get();
-        // dd($orders);
-        foreach ($orders as $order) {
-            $products = $order->products()->get();
-            $orderItems->push(['order' => $order, 'products' => $products]);
-        }
-        return view('orders', compact('orderItems'));
+        // foreach ($orders as $order) {
+        //     $products = $order->products()->get();
+        //     $orderItems->push(['order' => $order, 'products' => $products]);
+        // }
+        return view('orders', compact('orders'));
     }
 
     public function store(Request $request)
@@ -36,6 +33,13 @@ class OrderController extends Controller
             'phone_number' => 'string|required'
         ]);
 
+        $cart = session()->get('cart');
+
+        $total = 0;
+        foreach ($cart as $product) {
+            $total += (float) $product['price'] * (float) $product['quantity'];
+        }
+
         $order = Order::create([
             'user_id' => Auth::id(),
             'billing_name' => $request->name,
@@ -45,10 +49,9 @@ class OrderController extends Controller
             'billing_postcode' => $request->post_code,
             'billing_country' => $request->country,
             'billing_phone' => $request->phone_number,
-            'billing_total' => CartController::getCartTotal()
+            // 'billing_total' => CartController::getCartTotal()
+            'billing_total' => $total
         ]);
-
-        $cart = session()->get('cart');
 
         // Attach the products to the order_product table
         foreach ($cart as $id => $product) {

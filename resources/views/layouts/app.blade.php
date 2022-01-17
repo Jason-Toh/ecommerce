@@ -24,6 +24,8 @@
 
     <link href="{{ asset('css/checkout.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/orders.css') }}" rel="stylesheet">
+
     {{-- Material Design for Bootstrap --}}
     {{-- <link href="{{ asset('css/mdb.css') }}" rel="stylesheet"> --}}
 
