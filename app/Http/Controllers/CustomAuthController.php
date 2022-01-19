@@ -3,26 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('auth.login');
     }
 
-    public function registration(){
+    public function registration()
+    {
         return view('auth.register');
     }
 
-    public function customLogin(Request $request){
+    public function customLogin(Request $request)
+    {
         $request->validate([
             'email' => 'string|email|exists:users,email|required',
             'password' => 'string|required',
         ]);
-   
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
 
@@ -30,14 +33,15 @@ class CustomAuthController extends Controller
             session()->flash('success', 'Logged in Successfully!');
 
             // redirect to the previously intended location
-            return redirect()->intended('home');
+            return redirect()->intended('dashboard');
         }
 
         session()->flash('error', 'Password is incorrect.');
         return redirect('login');
     }
 
-    public function customRegistration(Request $request){
+    public function customRegistration(Request $request)
+    {
         $request->validate([
             'name' => 'string|required',
             'email' => 'string|email|unique:users|required',
@@ -54,7 +58,8 @@ class CustomAuthController extends Controller
         return redirect('login');
     }
 
-    public function logout(){
+    public function logout()
+    {
         // Remove all data from the session
         session()->flush();
         Auth::logout();

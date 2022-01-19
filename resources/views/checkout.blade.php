@@ -101,11 +101,11 @@
                     @foreach ($products as $id => $product)
                         <tr>
                             <td>
-                                {{-- @php dd($product['image'])@endphp --}}
-                                {{-- <div style="background-image: url({{ $product['image'] }})"
+                                @php dd($product['image'])@endphp
+                                <div style="background-image: url({{ asset($product['image']) }})"
                                     class="img-fluid rounded checkout-image">
-                                </div> --}}
-                                <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" />
+                                </div>
+                                {{-- <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" /> --}}
                             </td>
                             <td>
                                 <div class="text-decoration-none">

@@ -14,24 +14,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-
-    {{-- <!-- Styles --> Bootstrap v4 --}}
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-
-    {{-- Custom CSS --}}
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/checkout.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/orders.css') }}" rel="stylesheet">
-
-    {{-- Material Design for Bootstrap --}}
-    {{-- <link href="{{ asset('css/mdb.css') }}" rel="stylesheet"> --}}
-
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/algolia.css') }}" rel="stylesheet">
+    @include('partials.stylesheets')
+    @yield('stylesheets')
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,19 +36,7 @@
         </div>
     </main>
 
-    {{-- https://stackoverflow.com/questions/10808109/script-tag-async-defer --}}
-    <!-- Scripts -->
-    <script defer src="{{ asset('js/app.js') }}"></script>
-    {{-- jQuery --}}
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    {{-- Custom Script --}}
-    <script defer src="{{ asset('js/script.js') }}"></script>
-    {{-- Bootstrap tooltips --}}
-    <script defer src="{{ asset('js/popper.min.js') }}"></script>
-    {{-- Bootstrap Core JavaScript --}}
-    <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
-    {{-- MDB Core JavaScript --}}
-    <script defer src="{{ asset('js/mdb.min.js') }}"></script>
+    @include('partials.scripts')
 
     @stack('scripts')
 </body>

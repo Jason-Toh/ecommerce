@@ -13,4 +13,10 @@ class ProductController extends Controller
         $products = Product::all();
         return view('products', compact('products'));
     }
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('products.detail')->with('product', $product);
+    }
 }
