@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- start hero section -->
-    <div class="wallpaper" style="background-image: url({{ asset('storage/images/tech_wallpaper.jpg') }})">
+    <div class="dashboard-image" style="background-image: url({{ asset('storage/images/tech_wallpaper.jpg') }})">
         <div class="hero-content">
             <div class="col-md-4 hero-text">
                 <h3>

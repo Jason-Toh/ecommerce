@@ -34,7 +34,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="post_code"><i class="fa fa-map-pin"></i> Post Code</label>
-                            <input type="text" name="post_code" id="post_code" class="form-control num-only" required>
+                            <input type="text" name="post_code" id="post_code" class="form-control custom-num-only"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -48,7 +49,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phone_number"><i class="fa fa-phone"></i> Phone Number</label>
-                            <input type="text" name="phone_number" id="phone_number" class="form-control num-only" required>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control custom-num-only"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -59,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label for="cardnumber"><i class="fa fa-credit-card"></i> Card Number</label>
-                    <input type="text" class="form-control num-only" name="cardnumber" id="cardnumber" required>
+                    <input type="text" class="form-control custom-num-only" name="cardnumber" id="cardnumber" required>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -85,7 +87,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="cvc">CVC</label>
-                            <input type="text" class="form-control num-only" name="cvc" id="cvc" required>
+                            <input type="text" class="form-control custom-num-only" name="cvc" id="cvc" required>
                         </div>
                     </div>
                 </div> --}}
@@ -96,16 +98,12 @@
             <hr>
             <h3>Your Order</h3>
             <hr>
-            <table class="table table-borderless table-responsive">
+            <table class="table table-responsive">
                 <tbody>
                     @foreach ($products as $id => $product)
                         <tr>
                             <td>
-                                @php dd($product['image'])@endphp
-                                <div style="background-image: url({{ asset($product['image']) }})"
-                                    class="img-fluid rounded checkout-image">
-                                </div>
-                                {{-- <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" /> --}}
+                                <img src="{{ $product['image'] }}" class="img-fluid cart-image" />
                             </td>
                             <td>
                                 <div class="text-decoration-none">
@@ -126,12 +124,6 @@
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
-        $('.num-only').on('input', function(e) {
-            $(this).val($(this).val().replace(/[^0-9]/g, ''));
-        });
-    </script>
-
     {{-- <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/checkout.js') }}"></script> --}}
 @endpush

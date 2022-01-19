@@ -14,7 +14,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    @include('partials.stylesheets')
+    @include('includes.stylesheets')
     @yield('stylesheets')
 
     {{-- Font Awesome --}}
@@ -24,9 +24,7 @@
 
 <body>
     @include('includes.header')
-    {{-- https://getbootstrap.com/docs/4.0/utilities/spacing/
 
-        py-4: padding top and bottom, size 4 --}}
     <main class="py-4">
         <div class="container">
 
@@ -36,7 +34,7 @@
         </div>
     </main>
 
-    @include('partials.scripts')
+    @include('includes.scripts')
 
     @stack('scripts')
 </body>

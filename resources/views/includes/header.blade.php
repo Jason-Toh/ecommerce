@@ -29,9 +29,7 @@
                             </span>
                         </a>
                     </li>
-                    {{-- @guest is displayed only for unauthorized users
-                        https://stackoverflow.com/questions/64075908/laravel-7-blade-view-guest-and-authuser-problem
-                        https://stackoverflow.com/questions/51693904/laravel-double-auth-and-guest-statement --}}
+
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -46,9 +44,6 @@
                         @endif
                     @endguest
 
-                    {{-- Authorized users 
-
-                        TODO: Fixed authorized users able to access login page --}}
                     @auth
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -59,19 +54,12 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-                                {{-- <a class="dropdown-item" href="#">Another Action</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">Something else here</a> --}}
+
                             </div>
                         </li>
                     @endauth
                 </ul>
             </div>
-            {{-- https://getbootstrap.com/docs/4.0/utilities/spacing/ --}}
-            {{-- <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> --}}
         </div>
     </nav>
 </header>

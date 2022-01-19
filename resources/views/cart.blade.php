@@ -19,27 +19,25 @@
                     @php $total += $product['price'] * $product['quantity'] @endphp
                     <tr>
                         <td>
-                            <img src="{{ $product['image'] }}" class="img-fluid rounded cart-image" />
+                            <img src="{{ $product['image'] }}" class="img-fluid cart-image" />
                         </td>
                         <td>{{ $product['item']['name'] }}</td>
                         <td>
                             RM
-                            <span class="unit-price" id="{{ $id }}">
+                            <span class="cart-unit-price" id="{{ $id }}">
                                 {{ number_format($product['price'], 2, '.', '') }}
                             </span>
                         </td>
                         <td>
-                            <div class="quantity-btn">
-                                <span class="minus">-</span>
-                                <input type="text" value="{{ $product['quantity'] }}"
-                                    class="quantity update-quantity num-only" data-id="{{ $id }}"
-                                    id="{{ $id }}">
-                                <span class="plus">+</span>
-                            </div>
+                            <span class="cart-minus">-</span>
+                            <input type="text" value="{{ $product['quantity'] }}"
+                                class="cart-quantity-textbox cart-update-quantity custom-num-only"
+                                data-id="{{ $id }}" id="{{ $id }}">
+                            <span class="cart-plus">+</span>
                         </td>
                         <td>
                             RM
-                            <span class="total-price" id="{{ $id }}">
+                            <span class="cart-unit-total-price" id="{{ $id }}">
                                 {{ number_format($product['price'] * $product['quantity'], 2, '.', '') }}
                             </span>
                         </td>
@@ -56,12 +54,12 @@
                     <td colspan="5" class="text-right">
                         <h3>
                             Total: RM
-                            <span class="checkout-total-price">
+                            <span class="cart-total-price">
                                 {{ number_format($total, 2, '.', '') }}
                             </span>
                         </h3>
                     </td>
-                    <td colspan="6" class="text-right checkout">
+                    <td colspan="6" class="text-right cart-checkout-btn">
                         <button type="button" class="btn btn-success">
                             Checkout
                         </button>
@@ -80,41 +78,36 @@
 
 @push('scripts')
     <script type="text/javascript">
-        var total = parseFloat($('.checkout-total-price').text().trim());
+        var total = parseFloat($('.cart-total-price').text().trim());
 
         function updateTotalPrice(productId) {
-            let unitPrice = parseFloat($(`#${productId}.unit-price`).text().trim());
-            let quantity = parseInt($(`#${productId}.quantity`).val());
+            let unitPrice = parseFloat($(`#${productId}.cart-unit-price`).text().trim());
+            let quantity = parseInt($(`#${productId}.cart-quantity-textbox`).val());
             let totalPrice = unitPrice * quantity;
             let result = totalPrice ? totalPrice : unitPrice
-            $(`#${productId}.total-price`).text(`${result.toFixed(2)}`);
+            $(`#${productId}.cart-unit-total-price`).text(`${result.toFixed(2)}`);
 
             // Sum up the total price
             total = 0;
-            $('.total-price').each(function() {
+            $('.cart-unit-total-price').each(function() {
                 total += parseFloat($(this).text().trim());
             })
-            $('.checkout-total-price').text(`${total.toFixed(2)}`);
+            $('.cart-total-price').text(`${total.toFixed(2)}`);
         }
 
         // Defaults the value to 1 if empty input
-        $(`.quantity`).blur(function() {
+        $(`.cart-quantity-textbox`).blur(function() {
             if ($(this).val().trim().length === 0) {
                 $(this).val(1);
             }
         })
 
-        // Only allow positive number
-        $('.num-only').on('input', function(e) {
-            $(this).val($(this).val().replace(/[^0-9]/g, ''));
-        });
-
-        $('.update-quantity').on('input', function(e) {
+        $('.cart-update-quantity').on('input', function(e) {
             let productId = $(this).attr('id');
             updateTotalPrice(productId);
         })
 
-        $('.minus').click(function() {
+        $('.cart-minus').click(function() {
             let inputElem = $(this).parent().find('input');
             let quantity = parseInt(inputElem.val()) - 1;
 
@@ -124,7 +117,7 @@
             updateTotalPrice(productId);
         })
 
-        $('.plus').click(function() {
+        $('.cart-plus').click(function() {
             let inputElem = $(this).parent().find('input');
             let quantity = parseInt(inputElem.val()) + 1;
 
@@ -134,8 +127,8 @@
             updateTotalPrice(productId);
         })
 
-        $('.checkout').click(function(e) {
-            $('.quantity').each(function() {
+        $('.cart-checkout-btn').click(function(e) {
+            $('.cart-quantity-textbox').each(function() {
 
                 // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
                 let productId = $(this).data('id');

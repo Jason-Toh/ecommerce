@@ -8,5 +8,3 @@
 <script defer src="{{ asset('js/popper.min.js') }}"></script>
 {{-- Bootstrap Core JavaScript --}}
 <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
-{{-- MDB Core JavaScript --}}
-<script defer src="{{ asset('js/mdb.min.js') }}"></script>
