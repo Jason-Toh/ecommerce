@@ -4,8 +4,8 @@
     <div class="row">
         @foreach ($products as $product)
             <div class="col-md-3 mb-3 d-flex align-items-stretch">
-                <div class="card h-100" style="width: 18rem">
-                    <img class="img-fluid product-image" src="{{ asset($product->image) }}">
+                <div class="card" style="width: 18rem">
+                    <img class="img-fluid product-image card-img-top" src="{{ asset($product->image) }}">
 
                     <div class="card-body d-flex flex-column">
                         {{-- TODO: Fix image positioning --}}

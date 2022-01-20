@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     @include('includes.stylesheets')
-    @yield('stylesheets')
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,18 +24,18 @@
 <body>
     @include('includes.header')
 
-    <main class="py-4">
-        <div class="container">
+    @yield('dashboard')
+    <main class="container py-4">
 
-            @include('includes.message')
+        @include('includes.message')
+        @yield('content')
 
-            @yield('content')
-        </div>
     </main>
 
-    @include('includes.scripts')
+    @include('includes.footer')
 
-    @stack('scripts')
 </body>
+@include('includes.scripts')
+@stack('scripts')
 
 </html>

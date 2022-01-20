@@ -8,3 +8,5 @@
 <script defer src="{{ asset('js/popper.min.js') }}"></script>
 {{-- Bootstrap Core JavaScript --}}
 <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
+{{-- Slick Carousel --}}
+<script src="{{ asset('slick-carousel/slick/slick.min.js') }}"></script>

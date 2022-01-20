@@ -27,7 +27,7 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 // All users can see the product page
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products');
-    Route::get('details', [ProductController::class, 'show'])->name('products.details');
+    Route::get('detail', [ProductController::class, 'show'])->name('products.detail');
 });
 
 Route::prefix('cart')->group(function () {

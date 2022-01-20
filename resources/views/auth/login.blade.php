@@ -8,7 +8,6 @@
             </div>
             <form role="form" method="POST" action="{{ route('post_login') }}">
                 @csrf
-                {{-- https://stackoverflow.com/questions/36885413/how-to-display-validation-errors-next-to-each-related-input-field-in-laravel-5/55030568#55030568 --}}
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" class="form-control" name="email" id="email" required>
