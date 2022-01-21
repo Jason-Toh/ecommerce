@@ -29,11 +29,11 @@
                             </span>
                         </td>
                         <td>
-                            <span class="cart-minus">-</span>
+                            <span class="minus">-</span>
                             <input type="text" value="{{ $product['quantity'] }}"
-                                class="cart-quantity-textbox cart-update-quantity custom-num-only"
-                                data-id="{{ $id }}" id="{{ $id }}">
-                            <span class="cart-plus">+</span>
+                                class="quantity-textbox cart-update-quantity custom-num-only" data-id="{{ $id }}"
+                                id="{{ $id }}">
+                            <span class="plus">+</span>
                         </td>
                         <td>
                             RM
@@ -82,7 +82,7 @@
 
         function updateTotalPrice(productId) {
             let unitPrice = parseFloat($(`#${productId}.cart-unit-price`).text().trim());
-            let quantity = parseInt($(`#${productId}.cart-quantity-textbox`).val());
+            let quantity = parseInt($(`#${productId}.quantity-textbox`).val());
             let totalPrice = unitPrice * quantity;
             let result = totalPrice ? totalPrice : unitPrice
             $(`#${productId}.cart-unit-total-price`).text(`${result.toFixed(2)}`);
@@ -95,40 +95,13 @@
             $('.cart-total-price').text(`${total.toFixed(2)}`);
         }
 
-        // Defaults the value to 1 if empty input
-        $(`.cart-quantity-textbox`).blur(function() {
-            if ($(this).val().trim().length === 0) {
-                $(this).val(1);
-            }
-        })
-
         $('.cart-update-quantity').on('input', function(e) {
             let productId = $(this).attr('id');
             updateTotalPrice(productId);
         })
 
-        $('.cart-minus').click(function() {
-            let inputElem = $(this).parent().find('input');
-            let quantity = parseInt(inputElem.val()) - 1;
-
-            quantity = quantity < 1 ? 1 : quantity
-            inputElem.val(quantity);
-            let productId = inputElem.attr('id');
-            updateTotalPrice(productId);
-        })
-
-        $('.cart-plus').click(function() {
-            let inputElem = $(this).parent().find('input');
-            let quantity = parseInt(inputElem.val()) + 1;
-
-            inputElem.val(quantity);
-
-            let productId = inputElem.attr('id');
-            updateTotalPrice(productId);
-        })
-
         $('.cart-checkout-btn').click(function(e) {
-            $('.cart-quantity-textbox').each(function() {
+            $('.quantity-textbox').each(function() {
 
                 // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
                 let productId = $(this).data('id');

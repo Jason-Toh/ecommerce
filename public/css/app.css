@@ -4,6 +4,32 @@
     margin-top: 0; /* remove the gap so it doesn't close */
 }
 
+/* quantity buttons */
+.minus,
+.plus {
+    width: 30px;
+    height: 30px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    /* padding: 8px 5px 8px 5px; */
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer; /* Change mouse cursor to pointer */
+    user-select: none; /* Stops users from selecting the text*/
+}
+
+.quantity-textbox {
+    height: 30px;
+    width: 75px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .footer-bg {
     position: relative;
     background: #232425;
@@ -31,11 +57,11 @@
 
 .social-media-icons li a {
     color: #fff;
-    padding: 0 20px;
+    padding: 0 20px; /* Top and bottom: 0px, Left and right: 20px */
 }
 
 .social-media-icons li a:hover {
-    color: #fff !important;
+    color: #848484;
     text-decoration: none;
 }
 
@@ -56,7 +82,7 @@
 .footer-links ul li a {
     display: block;
     font-size: 14px;
-    color: #fff;
+    color: #848484;
 }
 
 .footer-links ul li a:hover {
@@ -115,36 +141,21 @@
     vertical-align: bottom;
 }
 
+/* Product Details */
+.detail-image {
+    object-fit: contain;
+    height: 300px;
+    border: 2px solid black;
+}
+
+.detail-stock-badge {
+    font-size: 1em;
+}
+
 /* Cart */
 .cart-image {
     object-fit: contain;
     height: 100px;
-}
-
-/* quantity buttons */
-.cart-minus,
-.cart-plus {
-    width: 30px;
-    height: 30px;
-    background: #f2f2f2;
-    border-radius: 4px;
-    /* padding: 8px 5px 8px 5px; */
-    border: 1px solid #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    cursor: pointer; /* Change mouse cursor to pointer */
-    user-select: none; /* Stops users from selecting the text*/
-}
-
-.cart-quantity-textbox {
-    height: 30px;
-    width: 75px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: inline-block;
-    vertical-align: middle;
 }
 
 /* Checkout */

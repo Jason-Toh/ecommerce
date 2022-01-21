@@ -27,12 +27,12 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 // All users can see the product page
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products');
-    Route::get('detail', [ProductController::class, 'show'])->name('products.detail');
+    Route::get('details/{product}', [ProductController::class, 'show'])->name('products.details');
 });
 
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('cart');
-    Route::get('add/{id}', [CartController::class, 'add'])->name('add.to.cart');
+    Route::post('add/{id}', [CartController::class, 'add'])->name('add.to.cart');
     Route::post('update', [CartController::class, 'update'])->name('update.cart');
     Route::get('remove/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
 });

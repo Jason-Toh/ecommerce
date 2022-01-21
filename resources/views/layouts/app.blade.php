@@ -33,8 +33,8 @@
     </main>
 
     @include('includes.footer')
-
 </body>
+
 @include('includes.scripts')
 @stack('scripts')
 

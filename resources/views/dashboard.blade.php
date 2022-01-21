@@ -29,7 +29,7 @@
         {{-- <div class="dashboard-product-slider"> --}}
         @foreach ($products as $product)
             <div class="col-md-4 mb-3">
-                <a href="{{ route('products.detail', $product->slug) }}">
+                <a href="{{ route('products.details', $product->slug) }}">
                     <div class="card">
                         <img src="{{ asset($product->image) }}" class="img-fluid product-image card-img-top">
                         <div class="card-body">
