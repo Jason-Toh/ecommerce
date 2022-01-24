@@ -2,6 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <img src="{{ asset('images/ecommerce_logo.png') }}" class="logo-image">
                 {{ config('app.name', 'Laravel') }}
             </a>
 

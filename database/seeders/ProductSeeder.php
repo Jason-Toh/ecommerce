@@ -14,35 +14,26 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $products = [
-            [
-                'name' => 'PS5',
-                'slug' => 'ps5',
-                'description' => 'Latest Sony Playstation that is powered by an eight-core AMD Zen 2 CPU and custom AMD Radeon GPU',
-                'image' =>  'images/ps5.jpg',
-                'price' => 600
-            ],
-            [
-                'name' => 'XBox',
-                'slug' => 'xbox',
-                'description' => 'Xbox is a gaming console brand developed and owned by Microsoft. The game console is capable of connecting to a television or other display media.',
-                'image' =>  'images/xbox.jpg',
-                'price' => 400
-            ],
+        $laptops = [
             [
                 'name' => 'Hp Laptop',
                 'slug' => 'hp-laptop',
                 'description' => 'HP Pavilion is a line of consumer-oriented laptop and desktop computers produced by HP Inc.',
                 'image' =>  'images/hp_laptop.jpg',
                 'price' => 700
-            ],
-            [
-                'name' => 'Nikon Camera',
-                'slug' => 'nikon-camera',
-                'description' => 'Combining outstanding optics with sophisticated design and features, Nikon compact digital cameras capture your everyday precious moments.',
-                'image' =>  'images/nikon_camera.jpg',
-                'price' => 300
-            ],
+            ]
+        ];
+
+        foreach ($laptops as $laptop) {
+            Product::create($laptop)->categories()->attach(1);
+        }
+
+        $desktops = [];
+        foreach ($desktops as $desktop) {
+            Product::create($desktop)->categories()->attach(2);
+        }
+
+        $phones = [
             [
                 'name' => 'Samsung Galaxy S9',
                 'slug' => 'samsung-galaxy-s9',
@@ -91,6 +82,27 @@ class ProductSeeder extends Seeder
                 'description' => 'The device is available globally in limited numbers, except for India where it enjoys wide availability.',
                 'image' => 'images/xiaomi_pocophone.jpg',
                 'price' => 240
+            ]
+        ];
+
+        foreach ($phones as $phone) {
+            Product::create($phone)->categories()->attach(3);
+        }
+
+        $consoles = [
+            [
+                'name' => 'PS5',
+                'slug' => 'ps5',
+                'description' => 'Latest Sony Playstation that is powered by an eight-core AMD Zen 2 CPU and custom AMD Radeon GPU',
+                'image' =>  'images/ps5.jpg',
+                'price' => 600
+            ],
+            [
+                'name' => 'XBox',
+                'slug' => 'xbox',
+                'description' => 'Xbox is a gaming console brand developed and owned by Microsoft. The game console is capable of connecting to a television or other display media.',
+                'image' =>  'images/xbox.jpg',
+                'price' => 400
             ],
             [
                 'name' => 'Nintendo Switch',
@@ -101,8 +113,32 @@ class ProductSeeder extends Seeder
             ]
         ];
 
-        foreach ($products as $key => $value) {
-            Product::create($value);
+        foreach ($consoles as $console) {
+            Product::create($console)->categories()->attach(4);
+        }
+
+        $cameras = [
+            [
+                'name' => 'Nikon Camera',
+                'slug' => 'nikon-camera',
+                'description' => 'Combining outstanding optics with sophisticated design and features, Nikon compact digital cameras capture your everyday precious moments.',
+                'image' =>  'images/nikon_camera.jpg',
+                'price' => 300
+            ]
+        ];
+
+        foreach ($cameras as $camera) {
+            Product::create($camera)->categories()->attach(5);
+        }
+
+        $tablets = [];
+        foreach ($tablets as $tablet) {
+            Product::create($tablet)->categories()->attach(6);
+        }
+
+        $tvs = [];
+        foreach ($tvs as $tv) {
+            Product::create($tv)->categories()->attach(7);
         }
     }
 }

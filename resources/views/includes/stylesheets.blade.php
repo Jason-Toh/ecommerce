@@ -1,5 +1,9 @@
-{{-- Bootstrap v4 --}}
-<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+{{-- Bootstrap 4 --}}
+<link href="{{ asset('css/bootstrap_4.css') }}" rel="stylesheet">
+
+{{-- Bootstrap 5 --}}
+{{-- <link href="{{ asset('css/bootstrap_5.css') }}" rel="stylesheet"> --}}
+
 {{-- Custom CSS --}}
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 {{-- Slicks --}}

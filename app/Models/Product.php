@@ -13,14 +13,21 @@ class Product extends Model
 
     // What can be inserted into the table
     protected $fillable = [
-        'name', 
-        'price', 
-        'description', 
+        'name',
+        'slug',
+        'price',
+        'description',
         'image'
     ];
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_product')->withTimestamps();
+    }
+
     // Pivot table
-    public function orders(){
+    public function orders()
+    {
         return $this->belongsToMany(Order::class, 'order_product')->withPivot('quantity')->withTimestamps();
     }
 }
