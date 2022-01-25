@@ -1,6 +1,42 @@
+/* Navbar */
+.navbar-brand:hover,
+.nav-link:hover {
+    background-color: #555;
+    transition: all 0.25s ease-in-out;
+}
+
+.navbar > .container > .navbar-brand {
+    padding: 10px;
+}
+
+.navbar-nav > .nav-item > .nav-link {
+    padding: 20px;
+    color: #fff;
+}
+
 .logo-image {
     width: 50px;
     height: 50px;
+}
+
+/* The side navigation menu */
+.sidebar {
+    position: relative;
+    width: 100%;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.sidebar ul li:hover {
+    background-color: #2196f3;
+    padding: 8px;
+    color: #fff;
+    transition: all 0.5s;
 }
 
 /* Display the dropdown menu on hover */
@@ -155,7 +191,7 @@
 .product-details-button {
     position: absolute;
     left: 25%;
-    top: 20%;
+    top: 15%;
 
     color: #fff;
     background-color: #000;
@@ -169,12 +205,12 @@
 }
 
 .product-card .product-details-button {
-    opacity: 0;
+    opacity: 0; /* transparent */
     transition: all 0.25s ease-in-out;
 }
 
 .product-card:hover .product-details-button {
-    opacity: 1;
+    opacity: 1; /* Non-transparent */
 }
 
 /* Product Details */
