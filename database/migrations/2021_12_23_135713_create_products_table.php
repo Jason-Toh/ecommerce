@@ -18,8 +18,11 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique(); // For SEO (Search Engine Optimization)
             $table->text('description')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('images')->nullable();
             $table->decimal('price', 8, 2)->default(0);
+            $table->integer('quantity')->default(10);
+            $table->boolean('featured')->default(false);
             $table->timestamps();
         });
     }

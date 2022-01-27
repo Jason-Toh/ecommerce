@@ -1,3 +1,14 @@
+/* 
+    Inherit keyword will cause the element to take on the colour of its parent 
+*/
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Navbar */
 .navbar-brand:hover,
 .nav-link:hover {
@@ -32,11 +43,15 @@
     margin-bottom: 20px;
 }
 
-.sidebar ul li:hover {
+.sidebar ul li a:hover {
     background-color: #2196f3;
-    padding: 8px;
     color: #fff;
+    padding: 8px;
     transition: all 0.5s;
+}
+
+.sidebar-active {
+    font-weight: 700;
 }
 
 /* Display the dropdown menu on hover */

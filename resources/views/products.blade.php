@@ -4,17 +4,48 @@
     <div class="row">
         <div class="col-md-3">
             <div class="sidebar">
-                <h4>Category</h4>
-                <ul>
-                    @foreach ($categories as $category)
-                        <li>{{ $category->name }}</li>
-                    @endforeach
-                </ul>
+                <div>
+                    <h4>Category</h4>
+                    <ul>
+                        @foreach ($categories as $category)
+                            <li class="{{ request()->category == $category->slug ? 'sidebar-active' : '' }}">
+                                <a href="{{ route('products', ['category' => $category->slug]) }}"
+                                    class="sidebar-link">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                        <li>
+                            <a href="{{ route('products') }}" class="sidebar-link">Featured</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Sort by Price</h4>
+                    <ul>
+                        <li class="{{ request()->sort == 'low_high' ? 'sidebar-active' : '' }}">
+                            <a href="{{ route('products', ['category' => request()->category, 'sort' => 'low_high']) }}">Low
+                                to High</a>
+                        </li>
+                        <li class="{{ request()->sort == 'high_low' ? 'sidebar-active' : '' }}">
+                            <a href="{{ route('products', ['category' => request()->category, 'sort' => 'high_low']) }}">High
+                                to Low</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="col-md-9">
+            <hr>
             <div class="row">
-                @foreach ($products as $product)
+                <div class="col-md-9">
+                    <h2>{{ $categoryName }}</h2>
+                </div>
+                <div class="col-md-3">
+                    {{ $products->links() }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                @forelse ($products as $product)
                     <div class="col-md-4 mb-3 d-flex align-items-stretch">
                         <div class="card product-card">
 
@@ -28,15 +59,16 @@
                                     class="card-link btn btn-primary product-details-button">
                                     View Details
                                 </a>
-                                {{-- <a href="{{ route('add.to.cart', $product->id) }}" class="card-link btn btn-primary">
-                            Add to Cart
-                        </a> --}}
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-md-4">
+                        <h3>No Items available</h3>
+                    </div>
+                @endforelse
             </div>
+            {{ $products->links() }}
         </div>
     </div>
-
 @endsection
