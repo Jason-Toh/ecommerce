@@ -31,6 +31,11 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <h4>Filter By Price</h4>
+                    <p class="alert alert-danger">This needs to be done later</p>
+                    <input type="range" class="product-price-slider" min=0 max=1000 value=0>
+                </div>
             </div>
         </div>
         <div class="col-md-9">
@@ -40,7 +45,7 @@
                     <h2>{{ $categoryName }}</h2>
                 </div>
                 <div class="col-md-3">
-                    {{ $products->links() }}
+                    {{ $products->appends(request()->input())->links() }}
                 </div>
             </div>
             <hr>
@@ -68,7 +73,7 @@
                     </div>
                 @endforelse
             </div>
-            {{ $products->links() }}
+            {{ $products->appends(request()->input())->links() }}
         </div>
     </div>
 @endsection

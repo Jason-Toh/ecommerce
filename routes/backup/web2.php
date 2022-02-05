@@ -22,7 +22,6 @@ use App\Http\Controllers\CouponController;
 */
 
 // Redirect to the login page
-Route::redirect('home', 'dashboard');
 Route::redirect('/', 'dashboard');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -30,6 +29,13 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products');
     Route::get('details/{product}', [ProductController::class, 'show'])->name('products.details');
+});
+
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart');
+    Route::post('add/{id}', [CartController::class, 'add'])->name('add.to.cart');
+    Route::post('update', [CartController::class, 'update'])->name('update.cart');
+    Route::get('remove/{id}', [CartController::class, 'remove'])->name('remove.from.cart');
 });
 
 // Unauthenticated users can see these routes
@@ -42,13 +48,6 @@ Route::middleware('guest')->group(function () {
 
 // Authenticated users can see these routes
 Route::middleware('auth')->group(function () {
-    Route::prefix('cart')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('cart');
-        Route::post('/', [CartController::class, 'store'])->name('add.to.cart');
-        Route::patch('{id}', [CartController::class, 'update'])->name('update.cart');
-        Route::delete('{id}', [CartController::class, 'destroy'])->name('remove.from.cart');
-    });
-
     Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
     // Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');

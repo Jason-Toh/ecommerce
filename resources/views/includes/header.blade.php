@@ -24,25 +24,29 @@
                             Shopping Cart
                             <span class="badge badge-light">
                                 {{-- Shows the number of items in the cart --}}
-                                @if (session()->has('cart'))
+                                {{-- @if (session()->has('cart'))
                                     {{ sizeof(session()->get('cart')) }}
-                                @endif
+                                @endif --}}
+                                @auth
+                                    {{-- Cart is defined as an alias in app.php in config folder --}}
+                                    @php
+                                        $cart = Cart::where('user_id', Auth::id())->first();
+                                    @endphp
+
+                                    {{ $cart->total_items }}
+                                @endauth
                             </span>
                         </a>
                     </li>
 
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
                     @endguest
 
                     @auth

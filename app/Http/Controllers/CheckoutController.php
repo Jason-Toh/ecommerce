@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\CartController;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $cart = session()->get('cart', []);
-        // $total = CartController::getCartTotal();
-        $total = 0;
-        foreach ($cart as $product) {
-            $total += (float) $product['price'] * (float) $product['quantity'];
-        }
-        return view('checkout')->with(['products' => $cart, 'total' => $total]);
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        $products = $cart->products()->get();
+
+        return view('checkout')->with([
+            'cart' => $cart,
+            'products' => $products
+        ]);
     }
 }

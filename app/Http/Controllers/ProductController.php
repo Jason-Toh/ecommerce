@@ -9,14 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         // $products = Product::all();
         $products = DB::table('products');
         $pagination = 9;
         $categories = Category::all();
         $categoryName = 'Featured';
-        if ($request->category) {
+        if (request()->category) {
             // Eager loading
             // $products = Product::with('categories')->whereHas('categories', function ($query) {
             //     $query->where('slug', request()->category);
@@ -24,15 +29,12 @@ class ProductController extends Controller
 
             // Same as above
             $products = Product::with('categories')->whereRelation('categories', 'slug', request()->category);
-            $categoryName = $categories->where('slug', $request->category)->first()->name;
+            $categoryName = $categories->where('slug', request()->category)->first()->name;
         }
 
-        // dd($products);
-
-        if ($request->sort == 'low_high') {
+        if (request()->sort == 'low_high') {
             $products = $products->orderBy('price')->paginate($pagination);
-            // dd($products);
-        } elseif ($request->sort == 'high_low') {
+        } elseif (request()->sort == 'high_low') {
             $products = $products->orderBy('price', 'desc')->paginate($pagination);
         } else {
             $products = $products->paginate($pagination);
@@ -45,6 +47,12 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();

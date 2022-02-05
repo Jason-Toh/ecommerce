@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (sizeof($cart->products()->get()) != 0)
+    @if (!empty($products))
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -14,39 +14,37 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
+                @php $total = 0; @endphp
+                @foreach ($products as $id => $product)
+                    @php $total += $product['price'] * $product['quantity'] @endphp
                     <tr>
                         <td>
-                            <img src="{{ $product->image }}" class="img-fluid cart-image" />
+                            <img src="{{ $product['image'] }}" class="img-fluid cart-image" />
                         </td>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ $product['item']['name'] }}</td>
                         <td>
                             RM
-                            <span class="cart-unit-price" id="{{ $product->id }}">
-                                {{ number_format($product->price, 2, '.', '') }}
+                            <span class="cart-unit-price" id="{{ $id }}">
+                                {{ number_format($product['price'], 2, '.', '') }}
                             </span>
                         </td>
                         <td>
                             <span class="minus">-</span>
-                            <input type="text" value="{{ $product->pivot->quantity }}"
-                                class="quantity-textbox cart-update-quantity custom-num-only" data-id="{{ $product->id }}"
-                                id="{{ $product->id }}">
+                            <input type="text" value="{{ $product['quantity'] }}"
+                                class="quantity-textbox cart-update-quantity custom-num-only" data-id="{{ $id }}"
+                                id="{{ $id }}">
                             <span class="plus">+</span>
                         </td>
                         <td>
                             RM
-                            <span class="cart-unit-total-price" id="{{ $product->id }}">
-                                {{ number_format($product->price * $product->pivot->quantity, 2, '.', '') }}
+                            <span class="cart-unit-total-price" id="{{ $id }}">
+                                {{ number_format($product['price'] * $product['quantity'], 2, '.', '') }}
                             </span>
                         </td>
                         <td>
-                            <form method="POST" action="{{ route('remove.from.cart', $product->id) }}">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            <a href="{{ route('remove.from.cart', $id) }}" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -55,9 +53,9 @@
                 <tr>
                     <td colspan="5" class="text-right">
                         <h3>
-                            Subtotal: RM
+                            Total: RM
                             <span class="cart-total-price">
-                                {{ number_format($cart->subtotal, 2, '.', '') }}
+                                {{ number_format($total, 2, '.', '') }}
                             </span>
                         </h3>
                     </td>
@@ -102,26 +100,6 @@
             updateTotalPrice(productId);
         })
 
-        $('.plus').click(function() {
-            let inputElem = $(this).parent().find('input');
-            let quantity = parseInt(inputElem.val()) + 1;
-
-            inputElem.val(quantity);
-
-            let productId = inputElem.attr('id');
-            updateTotalPrice(productId);
-        })
-
-        $('.minus').click(function() {
-            let inputElem = $(this).parent().find('input');
-            let quantity = parseInt(inputElem.val()) - 1;
-
-            quantity = quantity < 1 ? 1 : quantity
-            inputElem.val(quantity);
-            let productId = inputElem.attr('id');
-            updateTotalPrice(productId);
-        })
-
         $('.cart-checkout-btn').click(function(e) {
             $('.quantity-textbox').each(function() {
 
@@ -129,18 +107,13 @@
                 let productId = $(this).data('id');
                 let quantity = parseInt($(this).val());
 
-                let url = "{{ route('update.cart', ':productId') }}";
-                url = url.replace(":productId", productId);
-
-                console.log(url);
-
                 // Save all changes to the cart
                 $.ajax({
-                    url: url,
-                    type: 'PATCH',
+                    url: "{{ route('update.cart') }}",
+                    type: 'patch',
                     data: {
                         _token: "{{ csrf_token() }}", //needed for 419 unknown status
-                        product_id: productId,
+                        id: productId,
                         quantity: quantity
                     },
                     success: function(response) {

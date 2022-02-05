@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
@@ -37,7 +38,7 @@ class CustomAuthController extends Controller
         }
 
         session()->flash('error', 'Password is incorrect.');
-        return redirect('login');
+        return redirect()->route('login');
     }
 
     public function customRegistration(Request $request)
@@ -54,8 +55,12 @@ class CustomAuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $cart = Cart::create([
+            'user_id' => $user->id
+        ]);
+
         session()->flash('success', 'Registered Successfully!');
-        return redirect('login');
+        return redirect()->route('login');
     }
 
     public function logout()

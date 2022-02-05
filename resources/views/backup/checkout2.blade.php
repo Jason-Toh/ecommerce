@@ -102,19 +102,19 @@
             <hr>
             <table class="table table-responsive">
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $id => $product)
                         <tr>
                             <td>
-                                <img src="{{ $product->image }}" class="img-fluid cart-image" />
+                                <img src="{{ $product['image'] }}" class="img-fluid cart-image" />
                             </td>
                             <td>
                                 <div class="text-decoration-none">
-                                    <h3 class="checkout-name">{{ $product->name }}</h3>
-                                    <h3 class="checkout-price">RM {{ $product->price }}</h3>
+                                    <h3 class="checkout-name">{{ $product['item']['name'] }}</h3>
+                                    <h3 class="checkout-price">RM {{ $product['price'] }}</h3>
                                 </div>
                             </td>
                             <td>
-                                <span class="checkout-quantity">{{ $product->pivot->quantity }}</span>
+                                <span class="checkout-quantity">{{ $product['quantity'] }}</span>
                             </td>
                         </tr>
                     @endforeach
@@ -143,7 +143,7 @@
                         Total
                     </div>
                     <div class="col-md-4 offset-md-4">
-                        RM {{ number_format($cart->subtotal, 2, '.', '') }}
+                        RM {{ $total }}
                     </div>
                 </div>
             </div>

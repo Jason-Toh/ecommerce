@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 
@@ -44,7 +43,12 @@ class OrderController extends Controller
             'phone_number' => 'string|required'
         ]);
 
-        $cart = Cart::where('user_id', Auth::id())->first();
+        $cart = session()->get('cart');
+
+        $total = 0;
+        foreach ($cart as $product) {
+            $total += (float) $product['price'] * (float) $product['quantity'];
+        }
 
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -55,30 +59,17 @@ class OrderController extends Controller
             'billing_postcode' => $request->post_code,
             'billing_country' => $request->country,
             'billing_phone' => $request->phone_number,
-            'billing_total' => $cart->total
+            'billing_total' => $total
         ]);
 
-        $products = $cart->products()->get();
-
         // Attach the products to the order_product table
-        foreach ($products as $product) {
-            $order->products()->attach($product->id, [
-                'quantity' => $product->pivot->quantity
-            ]);
+        foreach ($cart as $id => $product) {
+            $order->products()->attach($id, ['quantity' => $product['quantity']]);
         }
-
-        // Reset all values to 0
-        $cart->subtotal = 0;
-        $cart->tax_value = 0;
-        $cart->total = 0;
-        $cart->total_items = 0;
-        $cart->save();
-
-        // Empty the cart
-        $cart->products()->detach();
 
         session()->flash('success', 'Your order has been made successfully');
 
+        session()->forget('cart');
         return redirect('products');
     }
 }

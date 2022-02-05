@@ -4,77 +4,123 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $cart = session()->get('cart', []);
-        return view('cart')->with(['products' => $cart]);
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        $products = $cart->products()->get();
+
+        return view('cart')->with([
+            'cart' => $cart,
+            'products' => $products
+        ]);
     }
 
-    public function add(Request $request, $id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        // https://stackoverflow.com/questions/33027047/what-is-the-difference-between-find-findorfail-first-firstorfail-get
-        $product = Product::findOrFail($id);
+        $id = $request->product_id;
+        $quantity = $request->quantity;
 
-        $cart = session()->get('cart', []);
+        /*
+         * first() returns a model
+         * get() returns a collection 
+         */
 
-        // If the item exists in the shopping cart
-        if (isset($cart[$id])) {
-            // Increase the quantity
-            $cart[$id]['quantity'] += $request->quantity;
-            // Increase the total price of the item in the cart based on quantity
-            // $this->items[$id]['price'] *= $this->items[$id]['quantity'];
+        $cart = Cart::where('user_id', Auth::id())->first();
+
+        // Returns a Product Model
+        $product = $cart->products()->where('product_id', $id)->first();
+
+        // If the product exist
+        if ($product) {
+            // update the quantity attribute in the pivot table
+            $product->carts()->updateExistingPivot($cart->id, [
+                'quantity' => $product->pivot->quantity + $quantity
+            ]);
         } else {
-            $cart[$id] = [
-                'quantity' => $request->quantity,
-                'price' => $product->price,
-                'item' => $product,
-                'image' => $product->image
-            ];
+            // Add a new record to the cart_product table
+            $cart->products()->attach($id, ['quantity' => $request->quantity]);
+            $cart->total_items += 1;
         }
 
-        // dd() is Dump and die
-        // dd(session()->get('cart'));
-
-        session()->put('cart', $cart);
+        $product = $cart->products()->where('product_id', $id)->first();
+        $cart->subtotal += $quantity * $product->price;
+        $cart->tax_value = ($cart->subtotal / 100) * 10;
+        $cart->total = $cart->subtotal + $cart->tax_value;
+        $cart->save();
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function update(Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        $id = $request->id;
         $quantity = $request->quantity;
 
         if ($id && $quantity) {
-            $cart = session()->get('cart');
-            $cart[$id]['quantity'] = $quantity;
-            session()->put('cart', $cart);
+            $cart = Cart::where('user_id', Auth::id())->first();
+            $cart->products()->updateExistingPivot($id, [
+                'quantity' => $quantity
+            ]);
+
+            $subtotal = 0;
+            foreach ($cart->products()->get() as $product) {
+                $subtotal += $product->price * $product->pivot->quantity;
+            }
+
+            $cart->subtotal = $subtotal;
+            $cart->tax_value = ($cart->subtotal / 100) * 10;
+            $cart->total = $cart->subtotal + $cart->tax_value;
+            $cart->save();
+
             session()->flash('success', 'Cart Updated Successfully');
         }
     }
 
-    public function remove($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $cart = session()->get('cart');
+        $cart = Cart::where('user_id', Auth::id())->first();
 
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-        }
+        $product = $cart->products()->where('id', $id)->first();
+        $total = $product->price * $product->pivot->quantity;
+
+        // Remove the product from the cart
+        $cart->products()->detach($id);
+
+        $cart->total_items -= 1;
+        $cart->subtotal -= $total;
+        $cart->tax_value = ($cart->subtotal / 100) * 10;
+        $cart->total = $cart->subtotal + $cart->tax_value;
+        $cart->save();
 
         return redirect()->back()->with('success', 'Product removed from cart successfully!');
-    }
-
-    public function getCartTotal()
-    {
-        $cart = session()->get('cart');
-        $total = 0;
-        foreach ($cart as $product) {
-            $total += (float) $product['price'] * (float) $product['quantity'];
-        }
-        return $total;
     }
 }

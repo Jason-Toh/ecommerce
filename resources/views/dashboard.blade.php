@@ -30,12 +30,16 @@
         @foreach ($products as $product)
             <div class="col-md-4 mb-3">
                 <a href="{{ route('products.details', $product->slug) }}">
-                    <div class="card">
+                    <div class="card product-card">
                         <img src="{{ asset($product->image) }}" class="img-fluid product-image card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ $product->name }}
                                 <span class="float-right">RM {{ $product->price }}</span>
+                                <a href="{{ route('products.details', $product->slug) }}"
+                                    class="card-link btn btn-primary product-details-button" style="left: 35%; top:30%">
+                                    View Details
+                                </a>
                             </h5>
                         </div>
                     </div>

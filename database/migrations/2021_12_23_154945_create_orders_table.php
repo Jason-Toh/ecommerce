@@ -23,9 +23,9 @@ class CreateOrdersTable extends Migration
             $table->string('billing_postcode')->nullable();
             $table->string('billing_country')->nullable();
             $table->string('billing_phone')->nullable();
-            $table->double('billing_discount', 8, 2)->default(0);
+            $table->double('billing_discount_value', 8, 2)->default(0);
             $table->string('billing_discount_code')->nullable();
-            $table->double('billing_tax', 8, 2)->default(0);
+            $table->double('billing_tax_value', 8, 2)->default(0);
             $table->double('billing_subtotal')->default(0);
             $table->double('billing_total', 8, 2)->default(0);
             $table->string('billing_card_name')->nullable();
