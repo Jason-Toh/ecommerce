@@ -55,9 +55,11 @@ class OrderController extends Controller
             'billing_postcode' => $request->post_code,
             'billing_country' => $request->country,
             'billing_phone' => $request->phone_number,
-            'billing_subtotal' => $cart->subtotal,
-            'billing_total' => $cart->total,
-            'billing_tax_value' => $cart->tax_value
+            'billing_discount_code' => getNumbers()->get('discountCode'),
+            'billing_discount_value' => getNumbers()->get('discountValue'),
+            'billing_subtotal' => getNumbers()->get('newSubtotal'),
+            'billing_tax_value' => getNumbers()->get('newTax'),
+            'billing_total' => getNumbers()->get('newTotal')
         ]);
 
         $products = $cart->products()->get();

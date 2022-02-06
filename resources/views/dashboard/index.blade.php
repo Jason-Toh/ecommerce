@@ -35,7 +35,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ $product->name }}
-                                <span class="float-right">RM {{ $product->price }}</span>
+                                <span class="float-right">{{ presentPrice($product->price) }}</span>
                                 <a href="{{ route('products.show', $product->slug) }}"
                                     class="card-link btn btn-primary product-details-button" style="left: 35%; top:30%">
                                     View Details

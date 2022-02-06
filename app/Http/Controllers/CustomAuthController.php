@@ -64,8 +64,7 @@ class CustomAuthController extends Controller
             'user_id' => $user->id
         ]);
 
-        session()->flash('success', 'Registered Successfully!');
-        return redirect()->route('login.index');
+        return redirect()->route('login.index')->withSuccess('Registered Successfully!');
     }
 
     public function logout()

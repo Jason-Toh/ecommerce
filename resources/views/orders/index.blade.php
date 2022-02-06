@@ -60,7 +60,7 @@
                                 @endforeach
                             </td>
                             <td><span class="badge badge-success">Fulfilled</span></td>
-                            <td>RM {{ presentPrice($order->billing_total) }}</td>
+                            <td>{{ presentPrice($order->billing_total) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -64,7 +64,7 @@ class CartController extends Controller
         $cart->total = $cart->subtotal + $cart->tax_value;
         $cart->save();
 
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->withSuccess('Product added to cart successfully!');
     }
 
     /**
@@ -94,7 +94,7 @@ class CartController extends Controller
             $cart->total = $cart->subtotal + $cart->tax_value;
             $cart->save();
 
-            session()->flash('success', 'Cart Updated Successfully');
+            session()->flash('success', 'Cart updated Successfully');
         }
     }
 
@@ -120,6 +120,6 @@ class CartController extends Controller
         $cart->total = $cart->subtotal + $cart->tax_value;
         $cart->save();
 
-        return redirect()->back()->with('success', 'Product removed from cart successfully!');
+        return redirect()->back()->withSuccess('Product removed from cart successfully!');
     }
 }

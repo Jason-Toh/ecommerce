@@ -92,9 +92,10 @@
                         </div>
                     </div>
                 </div> --}}
-                <button type="submit" class="btn btn-success btn-block">Complete Order</button>
+                <button type="submit" class="btn btn-success btn-block">
+                    Complete Order
+                </button>
             </form>
-
         </div>
         <div class="col-md-5 offset-md-1">
             <hr>
@@ -113,10 +114,10 @@
                                         {{ $product->name }}
                                     </span><br>
                                     Unit Price:<span class="checkout-price">
-                                        RM {{ presentPrice($product->price) }}
+                                        {{ presentPrice($product->price) }}
                                     </span><br>
                                     Item Subtotal:<span class="checkout-price">
-                                        RM {{ presentPrice($product->price * $product->pivot->quantity) }}
+                                        {{ presentPrice($product->price * $product->pivot->quantity) }}
                                     </span>
                                 </div>
                             </td>
@@ -128,53 +129,63 @@
                 </tbody>
             </table>
             <hr>
-            <div>
-                <div class="row">
-                    <div class="col-md-4">
-                        Subtotal
-                    </div>
-                    <div class="col-md-4 offset-md-4">
-                        RM {{ presentPrice($cart->subtotal) }}
-                    </div>
+            <div class="checkout-section">
+                <div class="checkout-section-left">
+                    Subtotal
+                    <br>
+                    @if (session()->has('coupon'))
+                        Discount ({{ $discountPercent ? $discountPercent . '%' : presentPrice($discountValue) }})
+                        <form action="{{ route('coupons.destroy') }}" method="post" style="display: inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                Remove
+                            </button>
+                        </form>
+                        <br>
+                        <hr>
+                        New Subtotal
+                        <br>
+                    @endif
+                    Tax (10%)
+                    <br>
+                    Total
+                    <br>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        Tax (10%)
-                    </div>
-                    <div class="col-md-4 offset-md-4">
-                        RM {{ presentPrice($cart->tax_value) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        Total
-                    </div>
-                    <div class="col-md-4 offset-md-4">
-                        RM {{ presentPrice($cart->total) }}
-                    </div>
+                <div class="checkout-section-right">
+                    {{ presentPrice($cart->subtotal) }}
+                    <br>
+                    @if (session()->has('coupon'))
+                        - {{ presentPrice($discountValue) }}
+                        <br>
+                        <hr>
+                        {{ presentPrice($newSubtotal) }}
+                        <br>
+                    @endif
+                    {{ presentPrice($newTax) }}
+                    <br>
+                    {{ presentPrice($newTotal) }}
+                    <br>
                 </div>
             </div>
             <hr>
             <div>
-                <form action="{{ route('coupon.store') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="coupon_code">Have coupon?</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="coupon_code" placeholder="Coupon code">
-                            <span class="input-group-append">
-                                <button class="btn btn-primary">Apply</button>
-                            </span>
+                @if (!session()->has('coupon'))
+                    <form action="{{ route('coupons.store') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="coupon_code">Have coupon?</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="coupon_code" placeholder="Coupon code">
+                                <span class="input-group-append">
+                                    <button class="btn btn-primary">Apply</button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
 
 @endsection
-
-@push('scripts')
-    {{-- <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{ asset('js/checkout.js') }}"></script> --}}
-@endpush

@@ -21,7 +21,6 @@
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>
-                            RM
                             <span class="cart-unit-price" id="{{ $product->id }}">
                                 {{ presentPrice($product->price) }}
                             </span>
@@ -34,15 +33,14 @@
                             <span class="plus">+</span>
                         </td>
                         <td>
-                            RM
                             <span class="cart-unit-total-price" id="{{ $product->id }}">
                                 {{ presentPrice($product->price * $product->pivot->quantity) }}
                             </span>
                         </td>
                         <td>
                             <form method="POST" action="{{ route('cart.destroy', $product->id) }}">
-                                @method('DELETE')
                                 @csrf
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -55,7 +53,7 @@
                 <tr>
                     <td colspan="5" class="text-right">
                         <h3>
-                            Subtotal: RM
+                            Subtotal:
                             <span class="cart-total-price">
                                 {{ presentPrice($cart->subtotal) }}
                             </span>
@@ -131,8 +129,6 @@
 
                 let url = "{{ route('cart.update', ':productId') }}";
                 url = url.replace(":productId", productId);
-
-                console.log(url);
 
                 // Save all changes to the cart
                 $.ajax({

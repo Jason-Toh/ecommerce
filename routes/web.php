@@ -29,18 +29,18 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.
 // All users can see the product page
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
-    Route::get('{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('{slug}', [ProductController::class, 'show'])->name('products.show');
 });
 
 // Unauthenticated users can see these routes
 Route::middleware('guest')->group(function () {
     Route::prefix('login')->group(function () {
-        Route::get('/', [CustomAuthController::class, 'showLoginForm'])->name('login.index');
+        Route::get('/', [CustomAuthController::class, 'showLoginForm'])->name('login');
         Route::post('/', [CustomAuthController::class, 'postLogin'])->name('login.store');
     });
 
     Route::prefix('register')->group(function () {
-        Route::get('/', [CustomAuthController::class, 'showRegisterForm'])->name('register.index');
+        Route::get('/', [CustomAuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/', [CustomAuthController::class, 'postRegister'])->name('register.store');
     });
 });
@@ -58,12 +58,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-    Route::prefix('coupon')->group(function () {
-        Route::post('/', [CouponController::class, 'store'])->name('coupon.store');
-        Route::delete('{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
+    Route::prefix('coupons')->group(function () {
+        Route::post('/', [CouponController::class, 'store'])->name('coupons.store');
+        Route::delete('/', [CouponController::class, 'destroy'])->name('coupons.destroy');
     });
 
-    Route::prefix('order')->group(function () {
+    Route::prefix('orders')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
         Route::post('/', [OrderController::class, 'store'])->name('orders.store');
     });

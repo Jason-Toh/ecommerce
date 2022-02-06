@@ -14,7 +14,7 @@ class Coupon extends Model
     protected $fillable = [
         'code',
         'type',
-        'value',
+        'value_off',
         'percent_off'
     ];
 
@@ -27,9 +27,9 @@ class Coupon extends Model
     {
         switch ($this->type) {
             case 'fixed':
-                return $this->value;
+                return $this->value_off;
             case 'percent':
-                return ($this->percent_off / 100) * $total;
+                return round(($this->percent_off / 100) * $total);
             default:
                 return 0;
         }

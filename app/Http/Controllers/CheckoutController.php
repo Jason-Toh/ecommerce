@@ -16,12 +16,16 @@ class CheckoutController extends Controller
     public function index()
     {
         $cart = Cart::where('user_id', Auth::id())->first();
-
         $products = $cart->products()->get();
 
         return view('checkout.index')->with([
             'cart' => $cart,
-            'products' => $products
+            'products' => $products,
+            'discountValue' => getNumbers()->get('discountValue'),
+            'discountPercent' => getNumbers()->get('discountPercent'),
+            'newSubtotal' => getNumbers()->get('newSubtotal'),
+            'newTax' => getNumbers()->get('newTax'),
+            'newTotal' => getNumbers()->get('newTotal')
         ]);
     }
 }

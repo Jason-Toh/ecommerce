@@ -32,18 +32,4 @@ class Cart extends Model
     {
         return $this->belongsToMany(Product::class, 'cart_product')->withPivot('quantity')->withTimestamps();
     }
-
-    public function getSubTotal()
-    {
-        $cart = session()->get('cart');
-        $total = 0;
-        foreach ($cart as $product) {
-            $total += (float) $product['price'] * (float) $product['quantity'];
-        }
-        return $total;
-    }
-
-    public function getTotal()
-    {
-    }
 }

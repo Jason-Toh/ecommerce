@@ -259,6 +259,22 @@ a:active {
     font-size: 0.9em;
 }
 
+.checkout-section {
+    display: flex;
+    justify-content: space-between; /* need to use display: flex for it to work*/
+    line-height: 2;
+}
+
+.checkout-section-left {
+    display: inline-block;
+    text-align: left;
+}
+
+.checkout-section-right {
+    display: inline-block;
+    text-align: right;
+}
+
 .checkout-name {
     font-weight: 500;
 }

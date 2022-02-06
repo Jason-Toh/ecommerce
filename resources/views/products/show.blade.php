@@ -10,7 +10,7 @@
         <div class="col-md-5 offset-md-1">
             <h2>{{ $product->name }}</h2>
             <span class="badge badge-success detail-stock-badge">In Stock</span>
-            <h3>RM {{ $product->price }}</h3>
+            <h3>{{ presentPrice($product->price) }}</h3>
             <p>{{ $product->description }}</p>
             <form role="form" method="POST" action="{{ route('cart.store') }}">
                 @csrf
