@@ -10,17 +10,22 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    public function registration()
+    public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    public function customLogin(Request $request)
+    public function postLogin(Request $request)
     {
         $request->validate([
             'email' => 'string|email|exists:users,email|required',
@@ -38,10 +43,10 @@ class CustomAuthController extends Controller
         }
 
         session()->flash('error', 'Password is incorrect.');
-        return redirect()->route('login');
+        return redirect()->route('login.index');
     }
 
-    public function customRegistration(Request $request)
+    public function postRegister(Request $request)
     {
         $request->validate([
             'name' => 'string|required',
@@ -60,7 +65,7 @@ class CustomAuthController extends Controller
         ]);
 
         session()->flash('success', 'Registered Successfully!');
-        return redirect()->route('login');
+        return redirect()->route('login.index');
     }
 
     public function logout()

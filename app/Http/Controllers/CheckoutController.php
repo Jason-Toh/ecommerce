@@ -19,7 +19,7 @@ class CheckoutController extends Controller
 
         $products = $cart->products()->get();
 
-        return view('checkout')->with([
+        return view('checkout.index')->with([
             'cart' => $cart,
             'products' => $products
         ]);

@@ -6,7 +6,7 @@
             <div class="text-center">
                 <h1>Login Account</h1>
             </div>
-            <form role="form" method="POST" action="{{ route('post_login') }}">
+            <form role="form" method="POST" action="{{ route('login.store') }}">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email</label>

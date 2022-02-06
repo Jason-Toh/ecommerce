@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <a class="navbar-brand" href="{{ route('dashboard.index') }}">
                 <img src="{{ asset('images/ecommerce_logo.png') }}" class="logo-image">
                 {{ config('app.name', 'Laravel') }}
             </a>
@@ -9,17 +9,17 @@
             <div class="collapse navbar-collapse" type="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">Products</a>
+                        <a class="nav-link" href="{{ route('products.index') }}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('orders') }}">Orders</a>
+                        <a class="nav-link" href="{{ route('orders.index') }}">Orders</a>
                     </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cart') }}">
+                        <a class="nav-link" href="{{ route('cart.index') }}">
                             <i class="fa fa-shopping-cart"></i>
                             Shopping Cart
                             <span class="badge badge-light">
@@ -41,11 +41,11 @@
 
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login.index') }}">Login</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('register.index') }}">Register</a>
                         </li>
                     @endguest
 

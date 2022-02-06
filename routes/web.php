@@ -24,42 +24,47 @@ use App\Http\Controllers\CouponController;
 // Redirect to the login page
 Route::redirect('home', 'dashboard');
 Route::redirect('/', 'dashboard');
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // All users can see the product page
 Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('products');
-    Route::get('details/{product}', [ProductController::class, 'show'])->name('products.details');
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('{product}', [ProductController::class, 'show'])->name('products.show');
 });
 
 // Unauthenticated users can see these routes
 Route::middleware('guest')->group(function () {
-    Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-    Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('post_login');
-    Route::get('registration', [CustomAuthController::class, 'registration'])->name('register');
-    Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('post_register');
+    Route::prefix('login')->group(function () {
+        Route::get('/', [CustomAuthController::class, 'showLoginForm'])->name('login.index');
+        Route::post('/', [CustomAuthController::class, 'postLogin'])->name('login.store');
+    });
+
+    Route::prefix('register')->group(function () {
+        Route::get('/', [CustomAuthController::class, 'showRegisterForm'])->name('register.index');
+        Route::post('/', [CustomAuthController::class, 'postRegister'])->name('register.store');
+    });
 });
 
 // Authenticated users can see these routes
 Route::middleware('auth')->group(function () {
+    Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
+
     Route::prefix('cart')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('cart');
-        Route::post('/', [CartController::class, 'store'])->name('add.to.cart');
-        Route::patch('{id}', [CartController::class, 'update'])->name('update.cart');
-        Route::delete('{id}', [CartController::class, 'destroy'])->name('remove.from.cart');
+        Route::get('/', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/', [CartController::class, 'store'])->name('cart.store');
+        Route::patch('{id}', [CartController::class, 'update'])->name('cart.update');
+        Route::delete('{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     });
 
-    Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout');
-    // Route::get('home', [HomeController::class, 'index'])->name('home');
-    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
     Route::prefix('coupon')->group(function () {
-        Route::post('store', [CouponController::class, 'store'])->name('coupon.store');
-        Route::delete('destroy', [CouponController::class, 'destroy'])->name('coupon.destroy');
+        Route::post('/', [CouponController::class, 'store'])->name('coupon.store');
+        Route::delete('{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
     });
 
     Route::prefix('order')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('orders');
-        Route::post('store', [OrderController::class, 'store'])->name('orders.store');
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::post('/', [OrderController::class, 'store'])->name('orders.store');
     });
 });

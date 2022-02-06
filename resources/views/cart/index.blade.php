@@ -40,7 +40,7 @@
                             </span>
                         </td>
                         <td>
-                            <form method="POST" action="{{ route('remove.from.cart', $product->id) }}">
+                            <form method="POST" action="{{ route('cart.destroy', $product->id) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">
@@ -129,7 +129,7 @@
                 let productId = $(this).data('id');
                 let quantity = parseInt($(this).val());
 
-                let url = "{{ route('update.cart', ':productId') }}";
+                let url = "{{ route('cart.update', ':productId') }}";
                 url = url.replace(":productId", productId);
 
                 console.log(url);
@@ -145,7 +145,7 @@
                     },
                     success: function(response) {
                         // Redirect to checkout page on success
-                        window.location.href = "{{ route('checkout') }}"
+                        window.location.href = "{{ route('checkout.index') }}"
                     }
                 })
             })

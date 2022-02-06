@@ -9,12 +9,12 @@
                     <ul>
                         @foreach ($categories as $category)
                             <li class="{{ request()->category == $category->slug ? 'sidebar-active' : '' }}">
-                                <a href="{{ route('products', ['category' => $category->slug]) }}"
+                                <a href="{{ route('products.index', ['category' => $category->slug]) }}"
                                     class="sidebar-link">{{ $category->name }}</a>
                             </li>
                         @endforeach
                         <li>
-                            <a href="{{ route('products') }}" class="sidebar-link">Featured</a>
+                            <a href="{{ route('products.index') }}" class="sidebar-link">Featured</a>
                         </li>
                     </ul>
                 </div>
@@ -22,11 +22,13 @@
                     <h4>Sort by Price</h4>
                     <ul>
                         <li class="{{ request()->sort == 'low_high' ? 'sidebar-active' : '' }}">
-                            <a href="{{ route('products', ['category' => request()->category, 'sort' => 'low_high']) }}">Low
+                            <a
+                                href="{{ route('products.index', ['category' => request()->category, 'sort' => 'low_high']) }}">Low
                                 to High</a>
                         </li>
                         <li class="{{ request()->sort == 'high_low' ? 'sidebar-active' : '' }}">
-                            <a href="{{ route('products', ['category' => request()->category, 'sort' => 'high_low']) }}">High
+                            <a
+                                href="{{ route('products.index', ['category' => request()->category, 'sort' => 'high_low']) }}">High
                                 to Low</a>
                         </li>
                     </ul>
@@ -60,7 +62,7 @@
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="card-text">{{ $product->description }}</p>
                                 <p class="card-text">RM {{ presentPrice($product->price) }}</p>
-                                <a href="{{ route('products.details', $product->slug) }}"
+                                <a href="{{ route('products.show', $product->slug) }}"
                                     class="card-link btn btn-primary product-details-button">
                                     View Details
                                 </a>

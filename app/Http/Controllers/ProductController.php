@@ -40,7 +40,7 @@ class ProductController extends Controller
             $products = $products->paginate($pagination);
         }
 
-        return view('products')->with([
+        return view('products.index')->with([
             'products' => $products,
             'categories' => $categories,
             'categoryName' => $categoryName
@@ -56,6 +56,6 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
-        return view('details')->with('product', $product);
+        return view('products.show')->with('product', $product);
     }
 }

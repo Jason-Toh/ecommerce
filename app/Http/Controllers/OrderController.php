@@ -23,7 +23,7 @@ class OrderController extends Controller
         //     $products = $order->products()->get();
         //     $orderItems->push(['order' => $order, 'products' => $products]);
         // }
-        return view('orders', compact('orders'));
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -81,6 +81,6 @@ class OrderController extends Controller
 
         session()->flash('success', 'Your order has been made successfully');
 
-        return redirect('products');
+        return redirect()->route('products.index');
     }
 }

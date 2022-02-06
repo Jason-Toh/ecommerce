@@ -12,7 +12,7 @@
             <span class="badge badge-success detail-stock-badge">In Stock</span>
             <h3>RM {{ $product->price }}</h3>
             <p>{{ $product->description }}</p>
-            <form role="form" method="POST" action="{{ route('add.to.cart') }}">
+            <form role="form" method="POST" action="{{ route('cart.store') }}">
                 @csrf
                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                 <div class="row">

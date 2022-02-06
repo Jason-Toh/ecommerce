@@ -19,7 +19,7 @@ class CartController extends Controller
 
         $products = $cart->products()->get();
 
-        return view('cart')->with([
+        return view('cart.index')->with([
             'cart' => $cart,
             'products' => $products
         ]);
@@ -108,7 +108,7 @@ class CartController extends Controller
     {
         $cart = Cart::where('user_id', Auth::id())->first();
 
-        $product = $cart->products()->where('id', $id)->first();
+        $product = $cart->products()->where('product_id', $id)->first();
         $total = $product->price * $product->pivot->quantity;
 
         // Remove the product from the cart
