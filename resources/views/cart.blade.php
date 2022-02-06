@@ -23,7 +23,7 @@
                         <td>
                             RM
                             <span class="cart-unit-price" id="{{ $product->id }}">
-                                {{ number_format($product->price, 2, '.', '') }}
+                                {{ presentPrice($product->price) }}
                             </span>
                         </td>
                         <td>
@@ -36,7 +36,7 @@
                         <td>
                             RM
                             <span class="cart-unit-total-price" id="{{ $product->id }}">
-                                {{ number_format($product->price * $product->pivot->quantity, 2, '.', '') }}
+                                {{ presentPrice($product->price * $product->pivot->quantity) }}
                             </span>
                         </td>
                         <td>
@@ -57,7 +57,7 @@
                         <h3>
                             Subtotal: RM
                             <span class="cart-total-price">
-                                {{ number_format($cart->subtotal, 2, '.', '') }}
+                                {{ presentPrice($cart->subtotal) }}
                             </span>
                         </h3>
                     </td>

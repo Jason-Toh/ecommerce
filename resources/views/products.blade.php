@@ -59,7 +59,7 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <p class="card-text">{{ $product->description }}</p>
-                                <p class="card-text"><strong>RM </strong>{{ $product->price }}</p>
+                                <p class="card-text">RM {{ presentPrice($product->price) }}</p>
                                 <a href="{{ route('products.details', $product->slug) }}"
                                     class="card-link btn btn-primary product-details-button">
                                     View Details

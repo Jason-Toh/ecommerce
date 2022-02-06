@@ -25,28 +25,28 @@
                                     # {{ $count }}
                                 </div>
                                 <div class="text-muted">
-                                    {{ date('F j, Y, g:i a', strtotime($order['created_at'])) }}
+                                    {{ date('F j, Y, g:i a', strtotime($order->created_at)) }}
                                 </div>
                             </td>
                             <td>
                                 @foreach ($order->products()->get() as $product)
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <img src="{{ $product['image'] }}" class="img-fluid order-product-image">
+                                            <img src="{{ $product->image }}" class="img-fluid order-product-image">
                                         </div>
                                         <div class="col-md-9">
                                             <div class="row d-flex">
-                                                <p class="order-product-name">{{ $product['name'] }}</p>
+                                                <p class="order-product-name">{{ $product->name }}</p>
                                             </div>
                                             <div class="row d-flex">
                                                 <p class="order-product-description text-muted">
-                                                    {{ $product['description'] }}
+                                                    {{ $product->description }}
                                                 </p>
                                             </div>
                                             <div class="row d-flex">
                                                 <div class="col-md-6">
                                                     <p class="order-product-price">
-                                                        Price: {{ $product['price'] }}
+                                                        Price: {{ presentPrice($product->price) }}
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
@@ -60,8 +60,7 @@
                                 @endforeach
                             </td>
                             <td><span class="badge badge-success">Fulfilled</span></td>
-                            <td>RM {{ $order['billing_total'] }}</td>
-                            <td></td>
+                            <td>RM {{ presentPrice($order->billing_total) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

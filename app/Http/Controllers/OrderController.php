@@ -55,7 +55,9 @@ class OrderController extends Controller
             'billing_postcode' => $request->post_code,
             'billing_country' => $request->country,
             'billing_phone' => $request->phone_number,
-            'billing_total' => $cart->total
+            'billing_subtotal' => $cart->subtotal,
+            'billing_total' => $cart->total,
+            'billing_tax_value' => $cart->tax_value
         ]);
 
         $products = $cart->products()->get();

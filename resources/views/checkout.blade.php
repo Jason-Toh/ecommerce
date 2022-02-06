@@ -108,9 +108,16 @@
                                 <img src="{{ $product->image }}" class="img-fluid cart-image" />
                             </td>
                             <td>
-                                <div class="text-decoration-none">
-                                    <h3 class="checkout-name">{{ $product->name }}</h3>
-                                    <h3 class="checkout-price">RM {{ $product->price }}</h3>
+                                <div class="checkout-container">
+                                    Name:<span class="checkout-name">
+                                        {{ $product->name }}
+                                    </span><br>
+                                    Unit Price:<span class="checkout-price">
+                                        RM {{ presentPrice($product->price) }}
+                                    </span><br>
+                                    Item Subtotal:<span class="checkout-price">
+                                        RM {{ presentPrice($product->price * $product->pivot->quantity) }}
+                                    </span>
                                 </div>
                             </td>
                             <td>
@@ -127,15 +134,15 @@
                         Subtotal
                     </div>
                     <div class="col-md-4 offset-md-4">
-                        RM 0
+                        RM {{ presentPrice($cart->subtotal) }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        Tax
+                        Tax (10%)
                     </div>
                     <div class="col-md-4 offset-md-4">
-                        RM 0
+                        RM {{ presentPrice($cart->tax_value) }}
                     </div>
                 </div>
                 <div class="row">
@@ -143,7 +150,7 @@
                         Total
                     </div>
                     <div class="col-md-4 offset-md-4">
-                        RM {{ number_format($cart->subtotal, 2, '.', '') }}
+                        RM {{ presentPrice($cart->total) }}
                     </div>
                 </div>
             </div>

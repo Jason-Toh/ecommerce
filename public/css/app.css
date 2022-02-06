@@ -255,12 +255,16 @@ a:active {
     margin-bottom: 1.6em;
 }
 
+.checkout-container {
+    font-size: 0.9em;
+}
+
 .checkout-name {
-    font-size: 1.25em;
+    font-weight: 500;
 }
 
 .checkout-price {
-    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .checkout-image {
