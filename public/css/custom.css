@@ -1,0 +1,312 @@
+/* 
+    Inherit keyword will cause the element to take on the colour of its parent 
+*/
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar-brand:hover,
+.nav-link:hover {
+    background-color: #555;
+    transition: all 0.25s ease-in-out;
+}
+
+.navbar > .container > .navbar-brand {
+    padding: 10px;
+}
+
+.navbar-nav > .nav-item > .nav-link {
+    padding: 20px;
+    color: #fff;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+}
+
+/* The side navigation menu */
+.sidebar {
+    position: relative;
+    width: 100%;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #2196f3;
+    color: #fff;
+    padding: 8px;
+    transition: all 0.5s;
+}
+
+.sidebar-active {
+    font-weight: 700;
+}
+
+/* Display the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* remove the gap so it doesn't close */
+}
+
+/* quantity buttons */
+.minus,
+.plus {
+    width: 30px;
+    height: 30px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    /* padding: 8px 5px 8px 5px; */
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer; /* Change mouse cursor to pointer */
+    user-select: none; /* Stops users from selecting the text*/
+}
+
+.quantity-textbox {
+    height: 30px;
+    width: 75px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.footer-bg {
+    position: relative;
+    background: #232425;
+    padding: 25px 0;
+    color: #c7c7c7;
+}
+
+.footer-bottom {
+    position: relative;
+    background: #363839;
+    padding: 25px 0;
+}
+
+.copyright {
+    color: #c7c7c7;
+}
+
+.social-media-icons {
+    padding-left: 0;
+}
+
+.social-media-icons li {
+    display: inline-block;
+}
+
+.social-media-icons li a {
+    color: #fff;
+    padding: 0 20px; /* Top and bottom: 0px, Left and right: 20px */
+}
+
+.social-media-icons li a:hover {
+    color: #848484;
+    text-decoration: none;
+}
+
+.footer-links h4 {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    display: block;
+    font-size: 14px;
+    color: #848484;
+}
+
+.footer-links ul li a:hover {
+    color: #5672f9;
+    text-decoration: underline;
+}
+
+/* Dashboard */
+.dashboard-image {
+    background-image: url(/images/tech_wallpaper_v2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 28em;
+    align-self: center;
+}
+
+.dashboard-btn-white {
+    border: 1px solid white;
+    color: white;
+    border-radius: 0;
+}
+
+.dashboard-btn-black {
+    border: 1px solid black;
+    color: black;
+    border-radius: 0;
+}
+
+.dashboard-show-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-content {
+    overflow: visible;
+    margin-left: 2em;
+    margin-top: 4em;
+    color: white;
+}
+
+.dashboard-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.dashboard-description {
+    text-align: center;
+    margin: 44px auto;
+}
+
+/* Product */
+.product-image {
+    object-fit: contain;
+    height: 200px;
+    vertical-align: bottom;
+
+    transition: all 0.25s ease-in-out;
+}
+
+.product-card:hover .product-image {
+    opacity: 0.5;
+}
+
+.product-details-button {
+    position: absolute;
+    left: 25%;
+    top: 15%;
+
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.product-details-button:hover {
+    color: #fff;
+    background-color: #204d74;
+    border-color: #122b40;
+}
+
+.product-card .product-details-button {
+    opacity: 0; /* transparent */
+    transition: all 0.25s ease-in-out;
+}
+
+.product-card:hover .product-details-button {
+    opacity: 1; /* Non-transparent */
+}
+
+/* Product Details */
+.detail-image {
+    object-fit: contain;
+    height: 300px;
+    border: 2px solid black;
+}
+
+.detail-stock-badge {
+    font-size: 1em;
+}
+
+/* Cart */
+.cart-image {
+    object-fit: contain;
+    height: 100px;
+}
+
+/* Checkout */
+.checkout-title {
+    font-size: 1.8em;
+}
+
+.checkout-subtitle {
+    font-size: 1.2em;
+    margin-bottom: 1.6em;
+}
+
+.checkout-container {
+    font-size: 0.9em;
+}
+
+.checkout-section {
+    display: flex;
+    justify-content: space-between; /* need to use display: flex for it to work*/
+    line-height: 2;
+}
+
+.checkout-section-left {
+    display: inline-block;
+    text-align: left;
+}
+
+.checkout-section-right {
+    display: inline-block;
+    text-align: right;
+}
+
+.checkout-name {
+    font-weight: 500;
+}
+
+.checkout-price {
+    font-weight: 500;
+}
+
+.checkout-image {
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.checkout-quantity {
+    border: 1px solid #222;
+    padding: 0.5em;
+}
+
+/* Order */
+.order-product-img {
+    object-fit: contain;
+    height: 100px;
+}
+
+.order-product-name {
+    font-size: 1em;
+}
+
+.order-product-description,
+.order-product-price,
+.order-product-quantity {
+    font-size: 0.9em;
+}

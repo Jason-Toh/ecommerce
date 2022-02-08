@@ -10,7 +10,6 @@
                         <th>Items</th>
                         <th>Status</th>
                         <th>Total Price</th>
-                        {{-- <th>Created at</th> --}}
                     </tr>
                 </thead>
                 <tbody class="table-body">
