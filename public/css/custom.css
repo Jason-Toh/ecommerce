@@ -245,6 +245,24 @@ a:active {
     height: 100px;
 }
 
+.cart-total-section ul {
+    list-style: none;
+    padding-left: 0;
+    border: 1px solid #555;
+}
+
+.cart-total-section ul li {
+    border-bottom: 1px solid #555;
+    /* color: #555; */
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 30px;
+}
+
+.cart-total-section ul li:last-child {
+    border-bottom: none;
+}
+
 /* Checkout */
 .checkout-title {
     font-size: 1.8em;

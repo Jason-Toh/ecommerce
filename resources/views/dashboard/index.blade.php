@@ -8,8 +8,8 @@
                     <div class="dashboard-content">
                         <h1>Ecommerce Website</h1>
                         <p>Made in Laravel</p>
-                        <button class="btn dashboard-btn-white">Shop</button>
-                        <button class="btn dashboard-btn-white">Contact Us</button>
+                        {{-- <button class="btn dashboard-btn-white">Shop</button> --}}
+                        {{-- <button class="btn dashboard-btn-white">Contact Us</button> --}}
                     </div>
                 </div>
             </div>

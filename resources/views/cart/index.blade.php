@@ -49,24 +49,39 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5" class="text-right">
-                        <h3>
-                            Subtotal:
-                            <span class="cart-total-price">
+        </table>
+        <div class="row">
+            <div class="col-md-5 ml-auto">
+                <div class="cart-total-section">
+                    <h2 class="text-center">Cart Total</h2>
+                    <ul>
+                        <li>
+                            Subtotal
+                            <span class="float-right cart-subtotal-price">
                                 {{ presentPrice($cart->subtotal) }}
                             </span>
-                        </h3>
-                    </td>
-                    <td colspan="6" class="text-right cart-checkout-btn">
-                        <button type="button" class="btn btn-success">
+                        </li>
+                        <li>
+                            Tax (10%)
+                            <span class="float-right cart-tax-value">
+                                {{ presentPrice($cart->tax_value) }}
+                            </span>
+                        </li>
+                        <li>
+                            Total
+                            <span class="float-right cart-total-price">
+                                {{ presentPrice($cart->total) }}
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="cart-checkout-btn">
+                        <button type="button" class="btn btn-success float-right">
                             Checkout
                         </button>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     @else
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -81,18 +96,24 @@
         var total = parseFloat($('.cart-total-price').text().trim());
 
         function updateTotalPrice(productId) {
-            let unitPrice = parseFloat($(`#${productId}.cart-unit-price`).text().trim());
+            let unitPrice = parseFloat($(`#${productId}.cart-unit-price`).text().trim().replace(/[^\d.]/g, ''));
             let quantity = parseInt($(`#${productId}.quantity-textbox`).val());
             let totalPrice = unitPrice * quantity;
             let result = totalPrice ? totalPrice : unitPrice
-            $(`#${productId}.cart-unit-total-price`).text(`${result.toFixed(2)}`);
+            $(`#${productId}.cart-unit-total-price`).text(`RM ${result.toFixed(2)}`);
 
             // Sum up the total price
-            total = 0;
+            subtotal = 0;
             $('.cart-unit-total-price').each(function() {
-                total += parseFloat($(this).text().trim());
+                subtotal += parseFloat($(this).text().trim().replace(/[^\d.]/g, ''));
             })
-            $('.cart-total-price').text(`${total.toFixed(2)}`);
+
+            tax_value = (subtotal / 100) * 10
+            total = subtotal + tax_value
+
+            $('.cart-subtotal-price').text(`RM ${subtotal.toFixed(2)}`);
+            $('.cart-tax-value').text(`RM ${tax_value.toFixed(2)}`);
+            $('.cart-total-price').text(`RM ${total.toFixed(2)}`);
         }
 
         $('.cart-update-quantity').on('input', function(e) {

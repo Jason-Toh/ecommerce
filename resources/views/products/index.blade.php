@@ -37,7 +37,11 @@
                     <h4>Filter By Price</h4>
                     {{-- <p class="alert alert-danger">This needs to be done later</p> --}}
                     {{-- <input type="range" class="product-price-slider" min=0 max=1000 value=0> --}}
-                    <div id="price-slider"></div>
+                    {{-- <div id="price-slider"></div> --}}
+                    {{-- <div class="price-filter">
+                        <input type="text" class="custom-num-only" placeholder="RM MIN">
+                        <input type="text" class="custom-num-only" placeholder="RM MAX">
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -83,19 +87,19 @@
 
 @push('scripts')
     <script type="text/javascript">
-        var slider = document.getElementById('price-slider');
-        noUiSlider.create(slider, {
-            start: [1, 1000],
-            connect: true,
-            range: {
-                'min': 1,
-                'max': 1000
-            },
-            pips: {
-                mode: 'steps',
-                stepped: true,
-                density: 4
-            }
-        })
+        // var slider = document.getElementById('price-slider');
+        // noUiSlider.create(slider, {
+        //     start: [1, 1000],
+        //     connect: true,
+        //     range: {
+        //         'min': 1,
+        //         'max': 1000
+        //     },
+        //     pips: {
+        //         mode: 'steps',
+        //         stepped: true,
+        //         density: 4
+        //     }
+        // })
     </script>
 @endpush

@@ -31,3 +31,22 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script text="text/javascript">
+        $('.plus').click(function() {
+            let inputElem = $(this).parent().find('input');
+            let quantity = parseInt(inputElem.val()) + 1;
+
+            inputElem.val(quantity);
+        })
+
+        $('.minus').click(function() {
+            let inputElem = $(this).parent().find('input');
+            let quantity = parseInt(inputElem.val()) - 1;
+
+            quantity = quantity < 1 ? 1 : quantity
+            inputElem.val(quantity);
+        })
+    </script>
+@endpush
