@@ -58,4 +58,8 @@ class ProductController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
         return view('products.show')->with('product', $product);
     }
+
+    public function search(Request $request)
+    {
+    }
 }

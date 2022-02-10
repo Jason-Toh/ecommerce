@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="{{ route('dashboard.index') }}">Home</a></li>
+                <li><i class="fa fa-chevron-right"></i></li>
+                <li>Products</li>
+                @if (request()->has('category'))
+                    <li><i class="fa fa-chevron-right"></i></li>
+                    <li>{{ ucfirst(request()->category) }}</li>
+                @endif
+            </ul>
+            @include('partials.search')
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-3">
             <div class="sidebar">
