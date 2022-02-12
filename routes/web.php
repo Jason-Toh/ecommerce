@@ -30,7 +30,8 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::get('{slug}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('search', [ProductController::class, 'search'])->name('products.search');
+    Route::post('search', [ProductController::class, 'search'])->name('products.search');
+    Route::post('filter', [ProductController::class, 'priceFilter'])->name('products.filter');
 });
 
 // Unauthenticated users can see these routes

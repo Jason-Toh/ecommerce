@@ -144,7 +144,6 @@
         $('.cart-checkout-btn').click(function(e) {
             $('.quantity-textbox').each(function() {
 
-                // https://stackoverflow.com/questions/19866509/jquery-get-an-element-by-its-data-id/19866970
                 let productId = $(this).data('id');
                 let quantity = parseInt($(this).val());
 
@@ -157,7 +156,7 @@
                     type: 'PATCH',
                     data: {
                         _token: "{{ csrf_token() }}", //needed for 419 unknown status
-                        product_id: productId,
+                        productId: productId,
                         quantity: quantity
                     },
                     success: function(response) {

@@ -4,9 +4,6 @@
 {{-- jQuery --}}
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-{{-- Custom Script --}}
-<script src="{{ asset('js/script.js') }}"></script>
-
 {{-- Bootstrap tooltips --}}
 <script src="{{ asset('js/popper.min.js') }}"></script>
 
@@ -18,3 +15,9 @@
 
 {{-- noUiSlider --}}
 <script src="{{ asset('js/nouislider.js') }}"></script>
+
+{{-- wNumb --}}
+<script src="{{ asset('js/wNumb.js') }}"></script>
+
+{{-- Custom Script --}}
+<script src="{{ asset('js/custom.js') }}"></script>

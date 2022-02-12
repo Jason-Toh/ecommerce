@@ -18,16 +18,27 @@ class ProductController extends Controller
     {
         // $products = Product::all();
         $products = DB::table('products');
+
+        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getSideBar($products);
+
+        return view('products.index')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'categoryName' => $categoryName,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice
+        ]);
+    }
+
+    public function getSideBar($products)
+    {
         $pagination = 9;
         $categories = Category::all();
         $categoryName = 'Featured';
+        $minPrice = 1;
+        $maxPrice = 1000;
         if (request()->category) {
             // Eager loading
-            // $products = Product::with('categories')->whereHas('categories', function ($query) {
-            //     $query->where('slug', request()->category);
-            // })->get();
-
-            // Same as above
             $products = Product::with('categories')->whereRelation('categories', 'slug', request()->category);
             $categoryName = $categories->where('slug', request()->category)->first()->name;
         }
@@ -39,12 +50,7 @@ class ProductController extends Controller
         } else {
             $products = $products->paginate($pagination);
         }
-
-        return view('products.index')->with([
-            'products' => $products,
-            'categories' => $categories,
-            'categoryName' => $categoryName
-        ]);
+        return array($products, $categories, $categoryName, $minPrice, $maxPrice);
     }
 
     /**
@@ -61,5 +67,36 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
+        $query = $request->get('query');
+        $products = Product::where('name', 'like', '%' . $query . '%');
+
+        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getSideBar($products);
+
+        return view('products.index')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'categoryName' => null,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+            'searchQuery' => $query,
+        ]);
+    }
+
+    public function priceFilter(Request $request)
+    {
+        $minPrice = $request->minPrice;
+        $maxPrice = $request->maxPrice;
+
+        $products = Product::whereBetween('price', [$minPrice, $maxPrice]);
+
+        list($products, $categories, $categoryName, $_, $_) = $this->getSideBar($products);
+
+        return view('products.index')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'categoryName' => $categoryName,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice
+        ]);
     }
 }

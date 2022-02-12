@@ -50,13 +50,21 @@
                 </div>
                 <div>
                     <h4>Filter By Price</h4>
-                    {{-- <p class="alert alert-danger">This needs to be done later</p> --}}
-                    {{-- <input type="range" class="product-price-slider" min=0 max=1000 value=0> --}}
-                    {{-- <div id="price-slider"></div> --}}
-                    {{-- <div class="price-filter">
-                        <input type="text" class="custom-num-only" placeholder="RM MIN">
-                        <input type="text" class="custom-num-only" placeholder="RM MAX">
-                    </div> --}}
+                    <form action="{{ route('products.filter') }}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <strong>Price Range: </strong>
+                            <span id="lower-price">{{ presentPrice($minPrice) }}</span>
+                            <input type="hidden" name="minPrice" value="{{ $minPrice }}" class="min-price">
+                            -
+                            <span id="upper-price">{{ presentPrice($maxPrice) }}</span>
+                            <input type="hidden" name="maxPrice" value="{{ $maxPrice }}" class="max-price">
+                        </div>
+                        <div id="price-slider" class="mb-3"></div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            Filter
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -64,7 +72,11 @@
             <hr>
             <div class="row">
                 <div class="col-md-9">
-                    <h2>{{ $categoryName }}</h2>
+                    @if (!empty($categoryName))
+                        <h2>{{ $categoryName }}</h2>
+                    @else
+                        <h4>Search results for "{{ $searchQuery }}"</h4>
+                    @endif
                 </div>
                 <div class="col-md-3">
                     {{ $products->appends(request()->input())->links() }}
@@ -102,19 +114,37 @@
 
 @push('scripts')
     <script type="text/javascript">
-        // var slider = document.getElementById('price-slider');
-        // noUiSlider.create(slider, {
-        //     start: [1, 1000],
-        //     connect: true,
-        //     range: {
-        //         'min': 1,
-        //         'max': 1000
-        //     },
-        //     pips: {
-        //         mode: 'steps',
-        //         stepped: true,
-        //         density: 4
-        //     }
-        // })
+        var slider = document.getElementById('price-slider');
+        var min_price = parseInt($('#lower-price').text().trim().replace(/[^\d.]/g, ''));
+        var max_price = parseInt($('#upper-price').text().trim().replace(/[^\d.]/g, ''));
+        noUiSlider.create(slider, {
+            start: [min_price, max_price],
+            connect: true,
+            behaviour: 'drag',
+            tooltips: [
+                wNumb({
+                    decimals: 0
+                }),
+                wNumb({
+                    decimals: 0
+                })
+            ],
+            range: {
+                'min': 1,
+                'max': 1000
+            }
+        });
+
+        var nodes = [
+            document.getElementById('lower-price'),
+            document.getElementById('upper-price')
+        ];
+
+        slider.noUiSlider.on('update', function(values, handle) {
+            var value = values[handle];
+            nodes[handle].innerHTML = 'RM' + Math.round(value);
+            $('.min-price').val(Math.round(values[0]));
+            $('.max-price').val(Math.round(values[1]));
+        });
     </script>
 @endpush

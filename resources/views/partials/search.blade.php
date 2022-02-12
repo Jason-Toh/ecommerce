@@ -1,7 +1,7 @@
-<form action="{{ route('products.search') }}" method="get" class="search-container">
+<form action="{{ route('products.search') }}" method="post" class="search-container">
     @csrf
     <div class="input-group">
-        <input type="text" name="query" placeholder="What are looking for?" class="form-control">
+        <input type="text" name="query" placeholder="What are looking for?" class="form-control" required>
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-search"></i>
