@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="product-main-image mb-3">
                 <img src="{{ asset($product->image) }}" class="img-fluid active">
             </div>
@@ -63,14 +63,9 @@
         images.forEach((e) => e.addEventListener('click', function() {
             currentImage.classList.remove('active');
 
-            currentImage.src = this.src;
-            currentImage.classList.add('active');
-
             // Executes after the transition has ended
             currentImage.addEventListener('transitionend', () => {
                 currentImage.src = this.src;
-                console.log(this.src);
-                console.log(currentImage.src);
                 currentImage.classList.add('active');
             })
 

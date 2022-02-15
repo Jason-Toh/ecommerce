@@ -282,11 +282,16 @@ a:active {
 }
 
 /* Product Details */
+.product-main-image {
+    width: 100%;
+    border: 2px solid black;
+}
+
 .product-main-image img {
     object-fit: contain;
     height: 300px;
-    border: 2px solid black;
     opacity: 0;
+    transition: opacity 0.1s ease-in-out;
 }
 
 .product-main-image img.active {
@@ -299,12 +304,12 @@ a:active {
 
 .product-gallery img {
     object-fit: contain;
-    width: 32%;
+    width: 25%;
     border: 1px solid black;
 }
 
 .product-gallery img:hover {
-    border: 2px solid blue;
+    border: 1px solid blue;
     cursor: pointer; /* change the mouse cursor to a pointer */
 }
 
@@ -313,7 +318,7 @@ a:active {
 }
 
 .product-gallery img.selected {
-    border: 2px solid blue;
+    border: 1px solid blue;
 }
 
 .stock-badge {
