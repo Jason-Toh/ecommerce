@@ -60,7 +60,7 @@
                             <span id="upper-price">{{ presentPrice($maxPrice) }}</span>
                             <input type="hidden" name="maxPrice" value="{{ $maxPrice }}" class="max-price">
                         </div>
-                        <div id="price-slider" class="mb-3"></div>
+                        <div id="price-slider" class="mb-3 slider-success"></div>
                         <button type="submit" class="btn btn-success btn-block">
                             Filter
                         </button>

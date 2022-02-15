@@ -16,10 +16,15 @@ class ProductSeeder extends Seeder
     {
         $laptops = [
             [
-                'name' => 'Hp Laptop',
-                'slug' => 'hp-laptop',
+                'name' => 'Hp Pavilion',
+                'slug' => 'hp-pavilion',
                 'description' => 'HP Pavilion is a line of consumer-oriented laptop and desktop computers produced by HP Inc.',
-                'image' =>  'images/hp_laptop.jpg',
+                'image' => 'images/hp_pavilion_1.jpg',
+                'images' => '[
+                    "images/hp_pavilion_2.jpg",
+                    "images/hp_pavilion_3.jpg",
+                    "images/hp_pavilion_4.jpg"
+                ]',
                 'price' => 700
             ]
         ];

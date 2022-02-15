@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "flexslider": "^2.7.2",
         "nouislider": "^15.5.1",
         "wnumb": "^1.2.0"
     }

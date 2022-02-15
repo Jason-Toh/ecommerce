@@ -43,7 +43,7 @@ class CustomAuthController extends Controller
         }
 
         session()->flash('error', 'Password is incorrect.');
-        return redirect()->route('login.index');
+        return redirect()->route('login');
     }
 
     public function postRegister(Request $request)
@@ -64,7 +64,7 @@ class CustomAuthController extends Controller
             'user_id' => $user->id
         ]);
 
-        return redirect()->route('login.index')->withSuccess('Registered Successfully!');
+        return redirect()->route('login')->withSuccess('Registered Successfully!');
     }
 
     public function logout()
