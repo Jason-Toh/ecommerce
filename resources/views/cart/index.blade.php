@@ -17,7 +17,7 @@
                 @foreach ($products as $product)
                     <tr>
                         <td>
-                            <img src="{{ $product->image }}" class="img-fluid cart-image" />
+                            <img src="{{ displayImage($product->image) }}" class="img-fluid cart-image" />
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>

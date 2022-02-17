@@ -7,6 +7,7 @@
             </a>
 
             <div class="collapse navbar-collapse" type="navbarSupportedContent">
+
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('products.index') }}">Products</a>
@@ -17,18 +18,13 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('cart.index') }}">
                             <i class="fa fa-shopping-cart"></i>
                             Shopping Cart
                             <span class="badge badge-light">
-                                {{-- Shows the number of items in the cart --}}
-                                {{-- @if (session()->has('cart'))
-                                    {{ sizeof(session()->get('cart')) }}
-                                @endif --}}
                                 @auth
-                                    {{-- Cart is defined as an alias in app.php in config folder --}}
                                     @php
                                         $cart = Cart::where('user_id', Auth::id())->first();
                                     @endphp

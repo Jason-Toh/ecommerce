@@ -23,6 +23,10 @@ function presentPrice($price)
     return 'RM ' . number_format($price, 2, '.', '');
 }
 
+function displayImage($path)
+{
+    return $path && file_exists('storage/' . $path) ? asset('storage/' . $path) : asset('storage/images/image_not_found.jpg');
+}
 
 function getNumbers()
 {

@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-md-5">
             <div class="product-main-image mb-3">
-                <img src="{{ asset($product->image) }}" class="img-fluid active">
+                <img src="{{ displayImage($product->image) }}" class="img-fluid active">
             </div>
             <div class="product-gallery">
-                <img src="{{ asset($product->image) }}" class="img-fluid">
+                <img src="{{ displayImage($product->image) }}" class="img-fluid">
                 @if ($product->images)
                     @foreach (json_decode($product->images, true) as $image)
-                        <img src="{{ asset($image) }}" class="img-fluid">
+                        <img src="{{ displayImage($image) }}" class="img-fluid">
                     @endforeach
                 @endif
             </div>
@@ -19,7 +19,7 @@
             <h2>{{ $product->name }}</h2>
             <span class="badge badge-success stock-badge">In Stock</span>
             <h3>{{ presentPrice($product->price) }}</h3>
-            <p>{{ $product->description }}</p>
+            <p>{!! $product->description !!}</p>
             <form role="form" method="POST" action="{{ route('cart.store') }}">
                 @csrf
                 <input type="hidden" value="{{ $product->id }}" name="product_id">

@@ -70,3 +70,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [OrderController::class, 'store'])->name('orders.store');
     });
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

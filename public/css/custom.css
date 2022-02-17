@@ -201,7 +201,7 @@ a:active {
 
 /* Dashboard */
 .dashboard-image {
-    background-image: url(/images/tech_wallpaper_v2.jpg);
+    background-image: url(/storage/images/tech_wallpaper_v2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 28em;

@@ -31,7 +31,7 @@
             <div class="col-md-4 mb-3">
                 <a href="{{ route('products.show', $product->slug) }}">
                     <div class="card product-card">
-                        <img src="{{ asset($product->image) }}" class="img-fluid product-image card-img-top">
+                        <img src="{{ displayImage($product->image) }}" class="img-fluid product-image card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ $product->name }}

@@ -31,7 +31,8 @@
                                 @foreach ($order->products()->get() as $product)
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <img src="{{ $product->image }}" class="img-fluid order-product-image">
+                                            <img src="{{ displayImage($product->image) }}"
+                                                class="img-fluid order-product-image">
                                         </div>
                                         <div class="col-md-9">
                                             <div class="row d-flex">
@@ -39,7 +40,7 @@
                                             </div>
                                             <div class="row d-flex">
                                                 <p class="order-product-description text-muted">
-                                                    {{ $product->description }}
+                                                    {!! $product->description !!}
                                                 </p>
                                             </div>
                                             <div class="row d-flex">

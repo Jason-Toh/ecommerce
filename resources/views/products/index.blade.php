@@ -88,11 +88,11 @@
                     <div class="col-md-4 mb-3 d-flex align-items-stretch">
                         <div class="card product-card">
 
-                            <img src="{{ asset($product->image) }}" class="img-fluid product-image card-img-top">
+                            <img src="{{ displayImage($product->image) }}" class="img-fluid product-image card-img-top">
 
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $product->name }}</h5>
-                                <p class="card-text">{{ $product->description }}</p>
+                                <p class="card-text">{!! $product->description !!}</p>
                                 <p class="card-text">{{ presentPrice($product->price) }}</p>
                                 <a href="{{ route('products.show', $product->slug) }}"
                                     class="card-link btn btn-primary product-details-button">
