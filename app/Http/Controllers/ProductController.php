@@ -34,9 +34,9 @@ class ProductController extends Controller
     {
         $pagination = 9;
         $categories = Category::all();
-        $categoryName = 'Featured';
+        $categoryName = 'Products';
         $minPrice = 1;
-        $maxPrice = 1000;
+        $maxPrice = 5000;
         if (request()->category) {
             // Eager loading
             $products = Product::with('categories')->whereRelation('categories', 'slug', request()->category);
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->get('query');
+        $query = $request->input('query');
         $products = Product::where('name', 'like', '%' . $query . '%');
 
         list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getSideBar($products);
@@ -82,7 +82,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function priceFilter(Request $request)
+    public function filter(Request $request)
     {
         $minPrice = $request->minPrice;
         $maxPrice = $request->maxPrice;

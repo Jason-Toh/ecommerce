@@ -28,9 +28,6 @@
                                     class="sidebar-link">{{ $category->name }}</a>
                             </li>
                         @endforeach
-                        <li>
-                            <a href="{{ route('products.index') }}" class="sidebar-link">Featured</a>
-                        </li>
                     </ul>
                 </div>
                 <div>
@@ -50,7 +47,7 @@
                 </div>
                 <div>
                     <h4>Filter By Price</h4>
-                    <form action="{{ route('products.filter') }}" method="post">
+                    <form action="{{ route('products.filter') }}" method="GET">
                         @csrf
                         <div class="mb-3">
                             <strong>Price Range: </strong>
@@ -131,7 +128,7 @@
             ],
             range: {
                 'min': 1,
-                'max': 1000
+                'max': 5000
             }
         });
 

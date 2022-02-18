@@ -1,5 +1,5 @@
-<form action="{{ route('products.search') }}" method="post" class="search-container">
-    @csrf
+<form action="{{ route('products.search') }}" method="GET" class="search-container">
+    {{-- @csrf --}}
     <div class="input-group">
         <input type="text" name="query" placeholder="What are looking for?" class="form-control" required>
         <div class="input-group-append">

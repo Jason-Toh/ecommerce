@@ -283,13 +283,12 @@ a:active {
 
 /* Product Details */
 .product-main-image {
-    width: 100%;
     border: 2px solid black;
 }
 
 .product-main-image img {
+    display: flex;
     object-fit: contain;
-    height: 300px;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
 }

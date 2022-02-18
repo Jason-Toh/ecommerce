@@ -14,7 +14,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $products = Product::inRandomOrder()->take(5)->get();
+        // $products = Product::inRandomOrder()->take(5)->get();
+        $products = Product::where('featured', true)->inRandomOrder()->take(5)->get();
         return view('dashboard.index', compact('products'));
     }
 }
