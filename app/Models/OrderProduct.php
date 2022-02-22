@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryProduct extends Model
+class OrderProduct extends Model
 {
     use HasFactory;
 
-    protected $table = 'category_product';
+    protected $table = 'order_product';
 
     // For Mass Assignment
     protected $fillable = [
-        'category_id',
-        'product_id'
+        'order_id',
+        'product_id',
+        'quantity'
     ];
 }

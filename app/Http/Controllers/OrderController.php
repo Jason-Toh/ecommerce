@@ -64,7 +64,7 @@ class OrderController extends Controller
 
         $products = $cart->products()->get();
 
-        // Attach the products to the order_product table
+        // Insert the products into the order_product table
         foreach ($products as $product) {
             $order->products()->attach($product->id, [
                 'quantity' => $product->pivot->quantity

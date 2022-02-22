@@ -26,15 +26,21 @@ class Order extends Model
         'billing_postcode',
         'billing_country',
         'billing_phone',
+        'billing_discount_code',
+        'billing_discount_value',
+        'billing_subtotal',
+        'billing_tax_value',
         'billing_total'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
     // Pivot table
-    public function products(){
-        return $this->belongsToMany(Product::class,'order_product')->withPivot('quantity')->withTimestamps();
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity')->withTimestamps();
     }
 }

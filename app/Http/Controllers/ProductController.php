@@ -19,7 +19,7 @@ class ProductController extends Controller
         // $products = Product::all();
         $products = DB::table('products');
 
-        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getSideBar($products);
+        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getValues($products);
 
         return view('products.index')->with([
             'products' => $products,
@@ -30,7 +30,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function getSideBar($products)
+    public function getValues($products)
     {
         $pagination = 9;
         $categories = Category::all();
@@ -70,7 +70,7 @@ class ProductController extends Controller
         $query = $request->input('query');
         $products = Product::where('name', 'like', '%' . $query . '%');
 
-        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getSideBar($products);
+        list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getValues($products);
 
         return view('products.index')->with([
             'products' => $products,
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
         $products = Product::whereBetween('price', [$minPrice, $maxPrice]);
 
-        list($products, $categories, $categoryName, $_, $_) = $this->getSideBar($products);
+        list($products, $categories, $categoryName, $_, $_) = $this->getValues($products);
 
         return view('products.index')->with([
             'products' => $products,
