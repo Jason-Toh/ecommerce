@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -14,8 +16,21 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // $products = Product::inRandomOrder()->take(5)->get();
+        $sliderImages = $this->getSliderImages();
+
         $products = Product::where('featured', true)->inRandomOrder()->take(5)->get();
-        return view('dashboard.index', compact('products'));
+        return view('dashboard.index', compact('products', 'sliderImages'));
+    }
+
+    public function getSliderImages()
+    {
+        $path = public_path('storage\images\slider');
+        $files = File::files($path);
+        $sliderImages = [];
+        foreach ($files as $file) {
+            $sliderImages[] = '\images\slider\\' . $file->getRelativePathname();
+        }
+
+        return $sliderImages;
     }
 }

@@ -25,6 +25,109 @@ a:active {
     color: #fff;
 }
 
+/* Carousel Slider */
+.slider-section {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 45px 0;
+    background-color: #f7f7f7;
+}
+.slider-section .row {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.slider-section #customCarousel {
+    width: 100%;
+    position: unset;
+}
+
+.slider-section .detail-box {
+    color: #3a4468;
+}
+
+.slider-section .detail-box h1 {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.slider-section .detail-box h1 span {
+    color: #f3c93e;
+}
+
+.slider-section .detail-box p {
+    color: #6d6d6d;
+}
+
+.slider-section .detail-box a {
+    display: inline-block;
+    padding: 10px 45px;
+    background-color: #f3c93e;
+    color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #f3c93e;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-top: 15px;
+}
+
+.slider-section .detail-box a:hover {
+    background-color: transparent;
+    color: #f3c93e;
+}
+
+.slider-section .img-box img {
+    height: 300px;
+    object-fit: contain;
+    width: 100%;
+    background-color: transparent;
+}
+
+.slider-section .carousel-btn-box {
+    position: absolute;
+    bottom: 0;
+    left: 80px;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 110px;
+    padding: 0;
+    color: #fff;
+    background: none;
+    border: 0;
+    transition: opacity 0.15s ease;
+}
+
+.slider-section .carousel-btn-box .carousel-control-prev,
+.slider-section .carousel-btn-box .carousel-control-next {
+    position: unset;
+    width: 50px;
+    height: 50px;
+    background-color: #3a4468;
+    opacity: 1;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    font-size: 18px;
+}
+
+.slider-section .carousel-btn-box .carousel-control-prev img,
+.slider-section .carousel-btn-box .carousel-control-next img {
+    width: 10px;
+}
+
+.slider-section .carousel-btn-box .carousel-control-prev:hover,
+.slider-section .carousel-btn-box .carousel-control-next:hover {
+    background-color: #f3c93e;
+}
+
 /* breadcrumb */
 .breadcrumb .container {
     align-items: center;
@@ -139,6 +242,7 @@ a:active {
     vertical-align: middle;
 }
 
+/* Footer */
 .footer-bg {
     position: relative;
     background: #232425;

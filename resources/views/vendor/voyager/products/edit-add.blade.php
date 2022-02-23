@@ -106,7 +106,7 @@ $add = is_null($dataTypeContent->getKey());
                                             <label>
                                                 <input type="checkbox" name="category[]" value="{{ $category->id }}"
                                                     style="margin-right: 5px"
-                                                    {{                                                     $categoriesForProduct->contains($category) ? 'checked' : '' }}>
+                                                    {{ $categoriesForProduct->contains($category) ? 'checked' : '' }}>
                                                 {{ $category->name }}
                                             </label>
                                         </li>

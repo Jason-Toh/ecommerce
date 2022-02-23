@@ -13,94 +13,48 @@
             </div>
         </div>
     </div> --}}
-    <section class="slider_section ">
-        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+    <section class="slider-section">
+        <div id="customCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="detail-box">
-                                    <h1>
-                                        Welcome to our shop
-                                    </h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe
-                                        dolorem deserunt quo quidem ad optio.
-                                    </p>
-                                    <a href="">
-                                        Read More
-                                    </a>
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($sliderImages as $image)
+                    <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-box">
+                                        <h1>Welcome to our shop</h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe
+                                            dolorem
+                                            deserunt quo quidem ad optio.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="detail-box">
-                                    <h1>
-                                        Welcome to our shop
-                                    </h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe
-                                        dolorem deserunt quo quidem ad optio.
-                                    </p>
-                                    <a href="">
-                                        Read More
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
+                                <div class="col-md-6">
+                                    <div class="img-box">
+                                        <img src="{{ displayImage($image) }}" alt="" class="d-block img-fluid">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
+                <div class="carousel-btn-box">
+                    <a class="carousel-control-prev" href="#customCarousel" role="button" data-slide="prev">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#customCarousel" role="button" data-slide="next">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <div class="carousel-item">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="detail-box">
-                                    <h1>
-                                        Welcome to our shop
-                                    </h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe
-                                        dolorem deserunt quo quidem ad optio.
-                                    </p>
-                                    <a href="">
-                                        Read More
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel_btn_box">
-                <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
         </div>
     </section>
@@ -115,7 +69,6 @@
     </p>
     <h2 class="dashboard-title">Featured Products</h2>
     <div class="row">
-        {{-- <div class="dashboard-product-slider"> --}}
         @foreach ($products as $product)
             <div class="col-md-4 mb-3">
                 <a href="{{ route('products.show', $product->slug) }}">
@@ -135,9 +88,7 @@
                 </a>
             </div>
         @endforeach
-        {{-- </div> --}}
     </div>
-    <!-- end products row -->
     <div class="dashboard-show-more">
         <a href="{{ route('products.index') }}">
             <button class="btn dashboard-btn-black">Show more</button>
