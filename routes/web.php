@@ -22,14 +22,11 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-// Redirect to the login page
+// Redirect to the dashboard page
 Route::redirect('home', 'dashboard');
 Route::redirect('/', 'dashboard');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-// All users can see the product page
-// 404 Not found issue: Don't use the same name on the same http request (Will cause 404 not error)
-// https://stackoverflow.com/questions/61981009/all-possible-issues-of-404-not-found-laravel-6
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::get('/show/{slug}', [ProductController::class, 'show'])->name('products.show');

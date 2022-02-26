@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="row">
-        {{-- offset increases left margin by 4 columns --}}
         <div class="col-md-4 offset-md-4">
             <div class="text-center">
                 <h1>Register Account</h1>
@@ -35,5 +34,4 @@
             </form>
         </div>
     </div>
-
 @endsection

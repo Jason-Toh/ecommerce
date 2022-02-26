@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Collection;
 
 class OrderController extends Controller
 {
@@ -17,12 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // $orderItems = new Collection;
         $orders = Order::where('user_id', Auth::id())->get();
-        // foreach ($orders as $order) {
-        //     $products = $order->products()->get();
-        //     $orderItems->push(['order' => $order, 'products' => $products]);
-        // }
         return view('orders.index', compact('orders'));
     }
 

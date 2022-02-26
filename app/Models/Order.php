@@ -11,12 +11,6 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    /*
-        Fillable means what columns in the table are allowed to be inserted, 
-        guarded means the model can't insert to that particular column.
-
-        https://stackoverflow.com/questions/22279435/what-does-mass-assignment-mean-in-laravel
-     */
     protected $fillable = [
         'user_id',
         'billing_name',

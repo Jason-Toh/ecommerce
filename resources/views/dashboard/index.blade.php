@@ -1,18 +1,6 @@
 @extends('layouts.app')
 
 @section('dashboard')
-    {{-- <div class="dashboard-image">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="dashboard-content">
-                        <h1>Ecommerce Website</h1>
-                        <p>Made in Laravel</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <section class="slider-section">
         <div id="customCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -27,9 +15,7 @@
                                     <div class="detail-box">
                                         <h1>Welcome to our shop</h1>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe
-                                            dolorem
-                                            deserunt quo quidem ad optio.
+                                            Made in Laravel
                                         </p>
                                     </div>
                                 </div>

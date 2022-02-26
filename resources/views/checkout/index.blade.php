@@ -55,43 +55,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <h3 class="text-muted">Payment Details</h3>
-                <div class="form-group">
-                    <label for="cardholder"><i class="fa fa-user"></i> Cardholder Name</label>
-                    <input type="text" class="form-control" name="cardholder" id="cardholder" required>
-                </div>
-                <div class="form-group">
-                    <label for="cardnumber"><i class="fa fa-credit-card"></i> Card Number</label>
-                    <input type="text" class="form-control custom-num-only" name="cardnumber" id="cardnumber" required>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label for="expiry_month"><i class="fa fa-calendar"></i> Expiry month</label>
-                        @php $months = range(1, 12); @endphp
-                        <select name="expiry_month" id="expiry_month">
-                            <option>Select Month</option>
-                            @foreach ($months as $month)
-                                <option value="{{ $month }}">{{ $month }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="expiry_year"><i class="fa fa-calendar"></i> Expiry Year</label>
-                        @php $years = range(1950, strftime("%Y", time())); @endphp
-                        <select name="expiry_year" id="expiry_year">
-                            <option>Select Year</option>
-                            @foreach ($years as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="cvc">CVC</label>
-                            <input type="text" class="form-control custom-num-only" name="cvc" id="cvc" required>
-                        </div>
-                    </div>
-                </div> --}}
                 <button type="submit" class="btn btn-success btn-block">
                     Complete Order
                 </button>
