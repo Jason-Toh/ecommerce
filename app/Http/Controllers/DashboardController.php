@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
     public function getSliderImages()
     {
-        $path = public_path('storage\images\slider');
+        $path = public_path('storage/images/slider');
         $files = File::files($path);
         $sliderImages = [];
         foreach ($files as $file) {
