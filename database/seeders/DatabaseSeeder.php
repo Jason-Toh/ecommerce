@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             ProductSeeder::class,
-            CouponSeeder::class
+            CouponSeeder::class,
+            VoyagerDatabaseSeeder::class,
+            VoyagerDummyDatabaseSeeder::class
         ]);
     }
 }

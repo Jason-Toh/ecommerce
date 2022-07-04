@@ -10,7 +10,11 @@ function presentPrice($price)
 
 function displayImage($path)
 {
-    return $path && file_exists('storage/' . $path) ? asset('storage/' . $path) : asset('storage/images/image_not_found.jpg');
+    if (env('APP_ENV') == 'local') {
+        return $path && file_exists('storage/' . $path) ? asset('storage/' . $path) : asset('storage/images/image_not_found.jpg');
+    } else {
+        return $path && file_exists($path) ? asset($path) : asset('images/image_not_found.jpg');
+    }
 }
 
 function getNumbers()

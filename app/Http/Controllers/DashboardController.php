@@ -24,11 +24,16 @@ class DashboardController extends Controller
 
     public function getSliderImages()
     {
-        $path = public_path('images/slider');
+        if (env('APP_ENV') == 'local') {
+            $path = public_path('storage/images/slider');
+        } else {
+            $path = public_path('images/slider');
+        }
+
         $files = File::files($path);
         $sliderImages = [];
         foreach ($files as $file) {
-            $sliderImages[] = '\images\slider\\' . $file->getRelativePathname();
+            $sliderImages[] = 'images/slider/' . $file->getRelativePathname();
         }
 
         return $sliderImages;
