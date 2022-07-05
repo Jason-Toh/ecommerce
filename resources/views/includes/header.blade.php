@@ -29,7 +29,7 @@
                                         $cart = Cart::where('user_id', Auth::id())->first();
                                     @endphp
 
-                                    {{-- {{ $cart->total_items }} --}}
+                                    {{ $cart->total_items }}
                                 @endauth
                             </span>
                         </a>
