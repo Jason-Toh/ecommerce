@@ -68,7 +68,8 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $products = Product::where(strtolower('name'), 'like', strtolower('%' . $query . '%'));
+        // Case insensitive search
+        $products = Product::whereRaw("UPPER('name') LIKE '%'" . strtoupper($query) . "'%'");
 
         list($products, $categories, $categoryName, $minPrice, $maxPrice) = $this->getValues($products);
 
